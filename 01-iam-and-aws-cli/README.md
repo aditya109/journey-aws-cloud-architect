@@ -91,9 +91,41 @@ An IAM Policies Structure
   - **Resource**: list of resources to which the actions applied to
   - **Condition**: conditions for when this policy is in effect (optional)
 
+There are two types of permission policies which can be attached to a particular user:
 
+1. *Add permissions*: doing it with pre-defined set of permission policies.
+2. *Add inline policy*: created our own custom permission policy and add it directly to the user.
+3. *Inherited from group*: policies from all the groups the user is part of.
 
+## IAM - User Protection
 
+There are two mechanisms present in AWS for user protection.
+
+1. **IAM - Password Policy** 
+   - Strong passwords = higher security for your account.
+   - In AWS, a password policy can be set.
+     For example,
+     - include uppercase letters, lowercase letters, numbers, non-alphanumberic characters.
+     - allow all IAM users to change their own passwords.
+     - require users to change thier passwords after some time (password expiration).
+     - prevent password re-use.
+2. MFA Multi Factor Authentication
+   - Users have access to your account and can possibly change configurations or delete resources in your AWS account.
+   - *Why ?* **You'd want to protect your root accounts and IAM users.**
+   - Main benefit of MFA: <u>if a password is stolen or hacked, the account is not compromised.</u>
+   - MFA devices options in AWS
+     - Virtual MFA devices
+       - Google Authenticator
+       - Authy
+
+| alias                 | command                                                      | usage                                     | remarks |
+| --------------------- | ------------------------------------------------------------ | ----------------------------------------- | ------- |
+| `oathtool_entbastion` | `oathtool --totp --base32 $(cat ~/.aws/secrets/ent-exotel-prod)` | TOTP generation for aws exotel enterprise |         |
+| `ovpn_entbastion`     | `sudo openvpn --config ~/ovpn_access_keys/ent_bastion.ovpn`  | Connect to bastion ent server with OVPN   |         |
+|                       |                                                              |                                           |         |
+|                       |                                                              |                                           |         |
+|                       |                                                              |                                           |         |
+|                       |                                                              |                                           |         |
 
 
 
