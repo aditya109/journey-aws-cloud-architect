@@ -118,14 +118,33 @@ There are two mechanisms present in AWS for user protection.
        - Google Authenticator
        - Authy
 
-| alias                 | command                                                      | usage                                     | remarks |
-| --------------------- | ------------------------------------------------------------ | ----------------------------------------- | ------- |
-| `oathtool_entbastion` | `oathtool --totp --base32 $(cat ~/.aws/secrets/ent-exotel-prod)` | TOTP generation for aws exotel enterprise |         |
-| `ovpn_entbastion`     | `sudo openvpn --config ~/ovpn_access_keys/ent_bastion.ovpn`  | Connect to bastion ent server with OVPN   |         |
-|                       |                                                              |                                           |         |
-|                       |                                                              |                                           |         |
-|                       |                                                              |                                           |         |
-|                       |                                                              |                                           |         |
+Using `oathtool` for MFA.
+
+1. Goto account > `Security Credentials` > Add a virtual device for MFA.
+
+2. Get the secret and place it in `~/.aws/secrets/my-secret-server` file.
+
+3. Use the following command to generate TOTPs.
+
+   ```
+   oathtool --totp --base32 $(cat ~/.aws/secrets/my-secret-server)
+   ```
+
+## AWS CLI
+
+How can users access AWS ?
+
+- To access AWS, you have 3 options:
+  - AWS Management Console (*protected by password + MFA*)
+  - AWS CLI (*protected by access keys*)
+  - AWS SDK (*protected by access keys*)
+- Users manage their own access keys. *Kindly do not share.*
+  Access key ID ~= username
+  Secret access key ~= password
+
+## AWS CloudShell: Region Availability
+
+AWS CloudShell is available in the following AWS Regions:
 
 
 
