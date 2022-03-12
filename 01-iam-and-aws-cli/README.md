@@ -183,9 +183,13 @@ Common roles:
 - Audit permissions of your account with the IAM credentials report.
 - **Never share IAM users and access keys**.
 
+## IAM Quiz
 
-
-
-
-
+| What is the proper definition of an IAM Role ?               |
+| ------------------------------------------------------------ |
+| An IAM entity that defines a set of permissions for making requests to AWS services, and will be used by an AWS service. |
+| **What are IAM Policies ?**                                  |
+| JSON documents that define a set of permissions for making requests to AWS services, and can be used by IAM Users, User Groups and IAM Roles.0 |
+| **According to the AWS Shared Responsibility Model, which of the following is AWS responsibility ?** |
+| AWS Infrastructure                                           |
 
