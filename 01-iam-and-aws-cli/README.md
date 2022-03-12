@@ -1,3 +1,15 @@
+**Table of Contents**:
+
+- [IAM: Users & Groups](#iam--users---groups)
+  * [IAM: Permissions](#iam--permissions)
+  * [IAM Policies Inheritance](#iam-policies-inheritance)
+    + [IAM Policies Structure](#iam-policies-structure)
+  * [IAM - User Protection](#iam---user-protection)
+  * [AWS CLI](#aws-cli)
+  * [IAM Roles for AWS Services](#iam-roles-for-aws-services)
+- [IAM Security Tools](#iam-security-tools)
+  * [IAM Guidelines & Best Practices](#iam-guidelines---best-practices)
+
 # IAM: Users & Groups
 
 IAM = Identify and Access Management, Global service
@@ -105,7 +117,7 @@ There are two mechanisms present in AWS for user protection.
    - Strong passwords = higher security for your account.
    - In AWS, a password policy can be set.
      For example,
-     - include uppercase letters, lowercase letters, numbers, non-alphanumberic characters.
+     - include uppercase letters, lowercase letters, numbers, non-alphanumeric characters.
      - allow all IAM users to change their own passwords.
      - require users to change thier passwords after some time (password expiration).
      - prevent password re-use.
@@ -116,11 +128,11 @@ There are two mechanisms present in AWS for user protection.
    - MFA devices options in AWS
      - Virtual MFA devices
        - Google Authenticator
-       - Authy
+       - `Authy`
 
 Using `oathtool` for MFA.
 
-1. Goto account > `Security Credentials` > Add a virtual device for MFA.
+1. Go to account > `Security Credentials` > Add a virtual device for MFA.
 
 2. Get the secret and place it in `~/.aws/secrets/my-secret-server` file.
 
@@ -157,7 +169,21 @@ Common roles:
 - IAM Access Advisor (user-level)
   - Access advisor shows the service permissions granted to a user and when those services were last accessed.
   - You can use this information to revise your policies.
-    - IAM > Access Management > Users > your_user > Access Advisor 
+    - IAM > Access Management > Users > your_user > Access Advisor.
+
+## IAM Guidelines & Best Practices
+
+- Don't use the root account except for AWS account setup.
+- One physical user = One AWS user.
+- **Assign users to groups** and assign permissions to groups.
+- Create a **strong password policy**.
+- Use and enforce the use of **Multi-Factor Authentication (MFA)**.
+- Create and use **Roles** for giving permissions to AWS services.
+- Use Access Keys for Programmatic Access (CLI/SDK).
+- Audit permissions of your account with the IAM credentials report.
+- **Never share IAM users and access keys**.
+
+
 
 
 
