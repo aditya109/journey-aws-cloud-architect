@@ -142,9 +142,24 @@ How can users access AWS ?
   Access key ID ~= username
   Secret access key ~= password
 
-## AWS CloudShell: Region Availability
+## IAM Roles for AWS Services
 
-AWS CloudShell is available in the following AWS Regions:
+Common roles:
+
+- EC2 instance roles
+- Lambda function roles
+
+# IAM Security Tools
+
+- IAM Credentials Report (account-level)
+  - A report that lists all your account's users and the status of their various credentials.
+    - To create this report, go to `Security Credentials`  > `Credential report` > `Download credential report`.
+- IAM Access Advisor (user-level)
+  - Access advisor shows the service permissions granted to a user and when those services were last accessed.
+  - You can use this information to revise your policies.
+    - IAM > Access Management > Users > your_user > Access Advisor 
+
+
 
 
 
