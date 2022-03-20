@@ -75,6 +75,8 @@ m5.2xlarge
 - `5` - generation (AWS improves them over time)
 - `2xlarge` - size within the instance class
 
+Use [EC2Instances.info](https://instances.vantage.sh/) for easy Amazon EC2 instance comparison.
+
 ### EC2 - General Purpose
 
 General purpose instances provide a balance of *compute*, *memory* and *networking* resources, and can be used for a variety of diverse workloads. 
@@ -88,9 +90,29 @@ They are ideal for batch processing workloads, media transcoding, high performan
 ### EC2 - Memory Optimized
 
 Memory optimized instances are designed to deliver fast performance for workloads that process large data sets in memory.
-It is ideal for memory-intensive applications such as open-source databases, in-memory caches and realtime big data analytics.
+It is ideal for memory-intensive applications such as :
+1. high-performance, relational/non-relational databases, 
+2. distributed web scale cache stores (in-memory caches),
+3. in-memory databases optimized for BI (business intelligence),
+4. applications performing real-time processing of big unstructured data.
+
+### EC2 - Storage Optimized
+
+Storage optimized for storage-intensive tasks that require high, sequential read and write access to large datasets on local storage. They are optimized to deliver tens of thousands of low-latency, random I/O operations per seconds (IOPS) to applications.
+Usecases:
+1. High frequence online transaction processing (OLTP) systems,
+2. Relational & NoSQL databases,
+3. Cache for in-memory databases,
+4. Data warehousing applications,
+5. Distributed file systems 
 
 ## Security Groups and classics ports overview
+
+### Introduction to Security Groups
+
+Security groups are the fundamental of network security in AWS.
+They control how traffic is allowed into or out of our EC2 instances.
+Security groups only contain allow <span style="color:orange">rules</span>. They can reference by IP or by security group.
 
 ## SSH Overview
 
