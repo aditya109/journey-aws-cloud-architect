@@ -112,7 +112,25 @@ Usecases:
 
 Security groups are the fundamental of network security in AWS.
 They control how traffic is allowed into or out of our EC2 instances.
-Security groups only contain allow <span style="color:orange">rules</span>. They can reference by IP or by security group.
+Security groups only contain  <span style="color:lightgreen">allow</span> rules. They can reference by IP or by security group.
+
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/e036c1e99108e5d21bc2f41b22b52f174c326970/02-ec2-fundamentals/assets/security-group-introduction.svg)
+
+### Security Groups - A deep dive
+
+Security groups are acting as a *firewall* on the EC2 instances. 
+They regulate:
+1. access to ports
+2. authorized IP ranges - IPv4 and IPv6
+3. control of inbound network (from other to the instance)
+4. control of outbound network (from the instance to other)
+
+
+Type  | Protocol | Port Range | Source | Description |
+---------|----------|---------|---------|---------| 
+ HTTP | TCP | 80 | 0.0.0.0/0 | test http page |
+ SSH | TCP | 22 | 122.149.196.85/32 | |
+ Custom | TCP | 4567 | 0.0.0.0/0 | java app |
 
 ## SSH Overview
 
