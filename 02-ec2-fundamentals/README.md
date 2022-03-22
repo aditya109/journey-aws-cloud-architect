@@ -135,7 +135,7 @@ Type  | Protocol | Port Range | Source | Description |
 
 #### Security Groups Diagram
 
-
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/02-ec2-fundamentals/assets/security-group-diagram.svg)
 
 
 
