@@ -137,6 +137,22 @@ Type  | Protocol | Port Range | Source | Description |
 
 ![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/02-ec2-fundamentals/assets/security-group-diagram.svg)
 
+**Good to know things about Security Groups**
+
+- Can be attached to multiple instances.
+
+- Locked down to a region / VPC combination.
+
+- Does live `outside` the EC2 - if traffic is blocked the EC2 won't see it.
+
+  > Its' good to maintain one separate security group for SSH access.
+
+- If your application is not accessible (timeout), then its' a secutiry group issue.
+
+- If your application gives a *connection refused* error, then its' an application error or its' not launched.
+
+
+
 
 
 
