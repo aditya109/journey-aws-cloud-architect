@@ -1,7 +1,5 @@
 **Table of Contents:**
 
-
-
 # EC2 Fundamentals
 
 **Caution:** [AWS Budget setup](https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/26100826?start=30#overview)
@@ -91,6 +89,7 @@ They are ideal for batch processing workloads, media transcoding, high performan
 
 Memory optimized instances are designed to deliver fast performance for workloads that process large data sets in memory.
 It is ideal for memory-intensive applications such as :
+
 1. high-performance, relational/non-relational databases, 
 2. distributed web scale cache stores (in-memory caches),
 3. in-memory databases optimized for BI (business intelligence),
@@ -100,6 +99,7 @@ It is ideal for memory-intensive applications such as :
 
 Storage optimized for storage-intensive tasks that require high, sequential read and write access to large datasets on local storage. They are optimized to deliver tens of thousands of low-latency, random I/O operations per seconds (IOPS) to applications.
 Usecases:
+
 1. High frequence online transaction processing (OLTP) systems,
 2. Relational & NoSQL databases,
 3. Cache for in-memory databases,
@@ -121,17 +121,16 @@ Security groups only contain **<span style="color:green">allow</span>** rules. T
 Security groups are acting as a *firewall* on the EC2 instances. 
 They regulate:
 
-1. access to ports
+1. access to ports 
 2. authorized IP ranges - IPv4 and IPv6
 3. control of inbound network (from other to the instance)
 4. control of outbound network (from the instance to other)
 
-
-Type  | Protocol | Port Range | Source | Description |
----------|----------|---------|---------|---------| 
- HTTP | TCP | 80 | 0.0.0.0/0 | test http page |
- SSH | TCP | 22 | 122.149.196.85/32 | |
- Custom | TCP | 4567 | 0.0.0.0/0 | java app |
+| Type   | Protocol | Port Range | Source            | Description    |
+| ------ | -------- | ---------- | ----------------- | -------------- |
+| HTTP   | TCP      | 80         | 0.0.0.0/0         | test http page |
+| SSH    | TCP      | 22         | 122.149.196.85/32 |                |
+| Custom | TCP      | 4567       | 0.0.0.0/0         | java app       |
 
 #### Security Groups Diagram
 
@@ -144,12 +143,24 @@ Type  | Protocol | Port Range | Source | Description |
 - Locked down to a region / VPC combination.
 
 - Does live `outside` the EC2 - if traffic is blocked the EC2 won't see it.
-
+  
   > Its' good to maintain one separate security group for SSH access.
 
-- If your application is not accessible (timeout), then its' a secutiry group issue.
+- If your application is not accessible (timeout), then its' a security group issue.
 
 - If your application gives a *connection refused* error, then its' an application error or its' not launched.
+
+- All inbound traffic is <span style="color:orange"> blocked </span> by default.
+
+- All outbound traffic is <span style="color:green">authorised</span> by default.
+
+### Referencing other security groups
+
+
+
+
+
+
 
 
 
@@ -170,6 +181,3 @@ Type  | Protocol | Port Range | Source | Description |
 ## EC2 Instance roles demo
 
 ## EC2 Instance launch types
-
-
-
