@@ -156,9 +156,20 @@ They regulate:
 
 ### Referencing other security groups
 
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/02-ec2-fundamentals/assets/referencing-other-security-groups.svg)
 
+### Classic Ports to know
 
+@
 
+| Port | Usecase                              | Description                    |
+| ---- | ------------------------------------ | ------------------------------ |
+| 22   | SSH (Secure Shell)                   | log into a linux instance      |
+| 21   | FTP (File Transfer Protocol)         | upload files into a file share |
+| 22   | SFTP (Secure File Transfer Protocol) | upload files using SSH         |
+| 80   | HTTP                                 | access unsecured websites      |
+| 443  | HTTPS                                | access secured websites        |
+| 3389 | RDP (Remote Desktop Protocol)        | log into a Windows instance    |
 
 
 
