@@ -429,3 +429,33 @@ Click on the EC2 instance > `Actions` > `Security` > `Modify IAM Role` > Choose 
 <strong>How to terminate Spot instances ?</strong>
 
 ![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/02-ec2-fundamentals/assets/terminate-spot-instances.svg)
+
+You can only cancel Spot instance requests that are **open, active or disabled**.
+
+<span style="color:crimson">**Cancelling a Spot Instance does not terminate instances.**</span>
+
+<span style="color:orange">You must first cancel a Spot Request, and then terminate the associated Spot instances.</span>
+
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/02-ec2-fundamentals/assets/difference-between-one-time-and-persistent.svg)
+
+### Spot Fleets
+
+- Spot Fleets = set of Spot Instances + (optional) On-Demand instances.
+
+- The Spot Fleet wll try to meet the target capacity with price constraints.
+  
+  - Define possible launch pools: instance type (m5.large), OS, Availability Zones (AZ)
+  
+  - Can have multiple launch pools, so that the fleet can choose.
+  
+  - Spot Fleet stops launch instances when reaching capacity or max cost.
+
+- Strategies to allocate Spot Instances:
+  
+  - **lowestPrice**: from the pool with the lowest price (cost optimization, short workload)
+  
+  - **diversified**: distributed across all pools (great for availability, long workloads)
+  
+  - **capacityOptimized**: pool with the optimal capacity for the number of instances.
+
+- <span style="color:limegreen">**Spot Fleets allow us to automatically request Spot Instances with the lowest price.**</span>
