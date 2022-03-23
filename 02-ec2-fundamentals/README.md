@@ -427,3 +427,5 @@ Click on the EC2 instance > `Actions` > `Security` > `Modify IAM Role` > Choose 
 > <span style="color:orange">Not suitable for critical jobs or databases.</span>
 
 <strong>How to terminate Spot instances ?</strong>
+
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/02-ec2-fundamentals/assets/terminate-spot-instances.svg)
