@@ -406,3 +406,24 @@ Click on the EC2 instance > `Actions` > `Security` > `Modify IAM Role` > Choose 
 - **Spot instances**: the hotel allows people to bid for the empty rooms and the highest bidder keeps the rooms. You can get kicked out at any time.
 
 - **Dedicated Hosts**: We book an entire building of the hotel.
+
+## Spot Instances & Spot Fleet
+
+- Can get a discount of upto 90% compared to `On-demand`.
+
+- Define **max spot price** and get the instance while **current spot price < max**.
+  
+  - The hourly spot price varies based on offer and capacity.
+  
+  - If the current spot price > max price you can choost to **stop** or **terminate** your instance with a 2-minute grace period.
+
+- Other strategy: **Spot Block**
+  
+  - *block* spot instance during a specified time frame (1 to 6 hours) without interruptions.
+  
+  - In rare situations, the instance may be reclaimed.
+
+> Used for batch jobs, data analysis or workloads that are resilient to failures.
+> <span style="color:orange">Not suitable for critical jobs or databases.</span>
+
+<strong>How to terminate Spot instances ?</strong>
