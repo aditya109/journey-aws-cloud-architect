@@ -1,5 +1,36 @@
 **Table of Contents:**
 
+- [EC2 Fundamentals](#ec2-fundamentals)
+  * [EC2 Basics](#ec2-basics)
+    + [EC2 sizing & configuration options](#ec2-sizing---configuration-options)
+    + [EC2 User Data](#ec2-user-data)
+    + [Create EC2 instance with EC2 user data to have a website](#create-ec2-instance-with-ec2-user-data-to-have-a-website)
+  * [EC2 instance type basics](#ec2-instance-type-basics)
+    + [EC2 - General Purpose](#ec2---general-purpose)
+    + [EC2 - Compute Optimized](#ec2---compute-optimized)
+    + [EC2 - Memory Optimized](#ec2---memory-optimized)
+    + [EC2 - Storage Optimized](#ec2---storage-optimized)
+  * [Security Groups and classics ports overview](#security-groups-and-classics-ports-overview)
+    + [Introduction to Security Groups](#introduction-to-security-groups)
+    + [Security Groups - A deep dive](#security-groups---a-deep-dive)
+      - [Security Groups Diagram](#security-groups-diagram)
+    + [Referencing other security groups](#referencing-other-security-groups)
+    + [Classic Ports to know](#classic-ports-to-know)
+  * [## SSH Overview](#---ssh-overview)
+  * [SSH Troubleshooting](#ssh-troubleshooting)
+  * [EC2 Instance connect](#ec2-instance-connect)
+  * [EC2 Instance roles demo](#ec2-instance-roles-demo)
+  * [EC2 Instance launch types](#ec2-instance-launch-types)
+    + [EC2 Instances Purchasing Options](#ec2-instances-purchasing-options)
+      - [EC2 On Demand](#ec2-on-demand)
+      - [EC2 Reserved Instances](#ec2-reserved-instances)
+        * [Convertible Reserved Instance](#convertible-reserved-instance)
+        * [Scheduled Reserved Instances](#scheduled-reserved-instances)
+      - [EC2 Spot Instances](#ec2-spot-instances)
+      - [EC2 Dedicated Hosts](#ec2-dedicated-hosts)
+        * [EC2 Dedicated Instances](#ec2-dedicated-instances)
+    + [Purchasing options - Hotel analogy](#purchasing-options---hotel-analogy)
+
 # EC2 Fundamentals
 
 **Caution:** [AWS Budget setup](https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/26100826?start=30#overview)
@@ -160,8 +191,6 @@ They regulate:
 
 ### Classic Ports to know
 
-@
-
 | Port | Usecase                              | Description                    |
 | ---- | ------------------------------------ | ------------------------------ |
 | 22   | SSH (Secure Shell)                   | log into a linux instance      |
@@ -171,24 +200,209 @@ They regulate:
 | 443  | HTTPS                                | access secured websites        |
 | 3389 | RDP (Remote Desktop Protocol)        | log into a Windows instance    |
 
+## ## SSH Overview
 
+We can connect to EC2 via:
 
+1. `Putty`
 
+2. `ssh`
 
+3. EC2 Instance Connect
 
+On doing the following, when first performing SSH into the instance:
 
+```bash
+ssh -i EC2Tutorial.pem ec2-user@35.180.100.144
+```
 
+we get the following error:
 
+```bash
+Permission 0644 for 'EC2Tutorial.pem' are too open.
+It is required that your private key files are NOT accessible by others
+This private key will be ignored.
+Load key "EC2Tutorial.pem": bad permissions
+```
 
+To fix this:
 
+1. On Linux
 
+```bash
+chmod 0400 EC2Tutorial.pem #on Linux
+ssh -i EC2Tutorial.pem ec2-user@35.180.100.144
+```
 
-## SSH Overview
+2. On Windows
+- Go to `Properties` of EC2Tutorial > `Security` tab > `Advanced` section.
+
+- Change owner of the key file to yourself.
+
+- Click on `Disable Inheritance`.
+
+- Remove all other users, except yourself.
+
+- Click on `Apply`.
+
+- Go back, ensure that the only user with full permissions of the file is you, yourself.
+
+- Try doing SSH on the file.
+
+```bash
+ssh -i EC2Tutorial.pem ec2-user@35.180.100.144
+```
 
 ## SSH Troubleshooting
 
+1. **There is a connection timeout.**
+   
+   This is a security group issue. Any timeout is related to security groups or a firewall. Ensure your security group looks like this and correctly assigned to your EC2 instance.
+
+2. **There is still a connection timeout issue.**
+   A corporate or personal firewall is blocking the connection. *Try using EC2 Instance Connect.*
+
+3. **There's a connection refused.**
+   This means the instance is reachable, but no SSH utility is running on the instance.
+   
+   1. Try restarting the instance.
+
+4. `Permission denied (publickey,gssapi-keyex,gssapi-with-mic)`
+   
+   This means either two things:
+   
+   - You are using the wrong security key or not using a security key. Please look at your EC2 instance configuration to make sure you assigned the correct key to it.
+   
+   - You are using the wrong user. Make sure you have started an **Amazon Linux 2 EC2 Instance**, and make sure you're using the user *ec2-user*. 
+     This is something you specify when doing `ec2-user@<public-ip>` (ex: `ec2-user@35.180.242.162`) in your SSH command or your Putty configuration.
+
 ## EC2 Instance connect
+
+You need to have SSH port open in inbound rules to connect to available EC2 instances.
 
 ## EC2 Instance roles demo
 
+> It is always a bad idea to store aws credentials like `Access Key` and `Secret Access Key` on the EC2 as that could enable anyone having access to our EC2 instance and steal those credentials.
+
+Use <span style="color:orange">**IAM roles**</span>.
+
+Click on the EC2 instance > `Actions` > `Security` > `Modify IAM Role` > Choose an IAM Role.
+
 ## EC2 Instance launch types
+
+### EC2 Instances Purchasing Options
+
+- On-demand instances: short workload, predictable pricing
+
+- Reserved: (MINIMUM 1 year)
+  
+  - Reserved instances: long workloads
+  
+  - Convertible Reserved instances: long workloads with flexible instances.
+  
+  - Scheduled Reserved instances: *e.g.,* every Thursday between 3 and 6 pm.
+
+- Spot Instances: short workloads, cheap, can loose instance (less reliable)
+
+- Dedicated Instances: book an entire physical server, control instance placement 
+
+#### EC2 On Demand
+
+- Pay for what you use:
+  
+  - Linux or Windows - billing per second, after the first minute
+  
+  - All other operating systems - billing per hour
+
+- Has the highest cost but no upfront payment
+
+- No long-term commitment
+  
+  > Recommended for short-term and un-interrupted workloads, where you can't predict how the application will behave.
+
+#### EC2 Reserved Instances
+
+- Up to 75% discount compared to `On-demand`.
+
+- Reservation period: 1 year = + discount | 3 years = +++ discount.
+
+- Purchasing options: no upfront | partial upfront = + | All upfront = ++ discount.
+
+- Reserve a specific instance type.
+
+- Recommended for steady-state usage applications (think database).
+
+##### Convertible Reserved Instance
+
+- can change the EC2 Instance type.
+
+- upto 54% discount.
+
+##### Scheduled Reserved Instances
+
+- launch within time window you reserve.
+
+- when you require a fraction of day/week/month.
+
+- still commitment over 1 to 3 years.
+
+#### EC2 Spot Instances
+
+- Can get a discount of upto 90% compared to `On-demand`.
+
+- Instances that you can *lose* at any point of time if your max price is less than the current spot price.
+
+- The MOST cost-efficient isntances in AWS
+
+> Useful for workloads that are resilient to failure.
+> 
+> - Batch jobs
+> 
+> - Data analysis
+> 
+> - Image processing
+> 
+> - Any distributed workloads
+> 
+> - Workloads with a flexible start and end time
+> 
+> <span style="color:orange">Not suitable for critical jobs or databases.</span>
+
+#### EC2 Dedicated Hosts
+
+- An Amazon EC2 Dedicated Host is a physical server with EC2 instance capacity  fully dedicated to your use. Dedicated hosts can help you address **compilance requirements** and reduce costs by allowing you to **use your existing server-bound software license**.
+
+- Allocated for your account for a 3-year period reservation
+
+- More expensive
+
+> Useful for software that have complicated licensing model (BYOL - Bring Your Own License), or for companies that have strong regulatory or compilance needs.
+
+##### EC2 Dedicated Instances
+
+- Instances running on hardware that's dedicated to you.
+
+- May share hardware with other instances in same account.
+
+- No control over instance placement (can move hardware after Start/Stop).
+
+| Characteristic                                          | Dedicated Instances | Dedicated Hosts |
+| ------------------------------------------------------- | ------------------- | --------------- |
+| Enables the use of dedicated physical servers           | ✅                   | ✅               |
+| Per instance billing (subject to a $$2$ per region fee) | ✅                   |                 |
+| Per host billing                                        |                     | ✅               |
+| Visibility of sockets, cores, host ID                   |                     | ✅               |
+| Affinity between a host and instance                    |                     | ✅               |
+| Targeted instance placement                             |                     | ✅               |
+| Automatic instance placement                            | ✅                   | ✅               |
+| Add capacity using an allocation request                | ✅                   | ✅               |
+
+### Purchasing options - Hotel analogy
+
+- **On demand**: coming and staying in hotel whenever we like, we pay the full price.
+
+- **Reserved**: like planning ahead and if we plan to stay for a long time, we may get a good discount.
+
+- **Spot instances**: the hotel allows people to bid for the empty rooms and the highest bidder keeps the rooms. You can get kicked out at any time.
+
+- **Dedicated Hosts**: We book an entire building of the hotel.
