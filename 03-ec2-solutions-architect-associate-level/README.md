@@ -56,16 +56,17 @@ Sometimes you'd want control over the EC2 Instance placement strategy. That stra
 - *Cluster* - clusters instances into a low-latency group in a single Availability Zone.)
   ![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/03-ec2-solutions-architect-associate-level/assets/cluster-placement-group.svg)
 
-- *Spread* - spreads instances across underlying hardware (max 7 instances per group per AZ) - critical applications.
+- *Spread* - spreads instances across underlying hardware (max 7 instances per group per AZ) - critical applications.)
+  ![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/03-ec2-solutions-architect-associate-level/assets/spread-placement-group.svg)
 
 - *Partition* - spreads instances across many different partitions (which rely on different sets of racks) within an AZ. Scales to 100s of Ec2 instances per group. (Hadoop, Cassandra, Kafka)
 
-|                | Cluster                                                                                                                       | Spread | Partition |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------ | --------- |
-| Characteristic | Same rack, same AZ<br/>(low latency, 10Gbps network)                                                                          |        |           |
-| Pros           | Great network (10Gbps bandwidth network between instances)                                                                    |        |           |
-| Cons           | If the rack fails, all instances fails at the same time.                                                                      |        |           |
-| Usecase        | Big Data job that needs to complete fast.<br/><br/>Applications that needs extremely low latency and high network throughput. |        |           |
+|                | Cluster                                                                                                                  | Spread                                                                                                                                               | Partition |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| Characteristic | Same rack, same AZ<br/>(low latency, 10Gbps network)                                                                     | Different rack, different AZ                                                                                                                         |           |
+| Pros           | Great network (10Gbps bandwidth network between instances)                                                               | Can span across AZs<br/>Reduced risk of simultaneous failure<br/>Ec2 Instances are on different physical hardware.                                   |           |
+| Cons           | If the rack fails, all instances fails at the same time.                                                                 | Limited to 7 instances per AZ per placement group.                                                                                                   |           |
+| Usecase        | Big Data job that needs to complete fast.<br/>Applications that needs extremely low latency and high network throughput. | Application that needs to maximize high availablility.<br/>Critical applications where each instances must be isolated from failure from each other. |           |
 
 ## Elastic Network Interfaces (ENI) - Overview
 
