@@ -84,6 +84,31 @@ Now while creating an EC2 Instance, within `Configure Instance`, see `Placement 
 ## Elastic Network Interfaces (ENI) - Overview
 
 They are logical component in a VPC that represents a <span style="color:cyan">*virtual network card*</span>.
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/03-ec2-solutions-architect-associate-level/assets/eni.svg)
+
+- The ENI can have the following attributes:
+  
+  - Primary private IPv4, one or more secondary IPv4
+  
+  - One Elastic IP (IPv4) per private IPv4
+  
+  - One Public IP (IPv4)
+  
+  - One or more security groups
+  
+  - A MAC Address
+
+- You can create ENI independently and attach them on the fly (move them) on EC2 instances for failover.
+
+- Bound to a specific AZ.
+
+### Hands-On
+
+Go to `Networking and Security` > `Network Interfaces`.
+
+To create a new ENI, we give a name, assign a `Subnet` (has to be in the same AZ as the EC2 instance)
+
+> Elastic Fabric Adapter is a network interface for Amazon EC2 instances that enables customers to run applications requiring high levels of inter-node communications at scale on AWS. 
 
 ## ENI - Extra Reading
 
