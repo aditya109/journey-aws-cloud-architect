@@ -59,16 +59,31 @@ Sometimes you'd want control over the EC2 Instance placement strategy. That stra
 - *Spread* - spreads instances across underlying hardware (max 7 instances per group per AZ) - critical applications.)
   ![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/03-ec2-solutions-architect-associate-level/assets/spread-placement-group.svg)
 
-- *Partition* - spreads instances across many different partitions (which rely on different sets of racks) within an AZ. Scales to 100s of Ec2 instances per group. (Hadoop, Cassandra, Kafka)
+- *Partition* - spreads instances across many different partitions (which rely on different sets of racks) within an AZ. Scales to 100s of Ec2 instances per group. (Hadoop, Cassandra, Kafka))
+  ![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/03-ec2-solutions-architect-associate-level/assets/partition-placement-group.svg)
+  
+  Each partition is a rack (upto 7 partitions per AZ).
 
-|                | Cluster                                                                                                                  | Spread                                                                                                                                               | Partition |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| Characteristic | Same rack, same AZ<br/>(low latency, 10Gbps network)                                                                     | Different rack, different AZ                                                                                                                         |           |
-| Pros           | Great network (10Gbps bandwidth network between instances)                                                               | Can span across AZs<br/>Reduced risk of simultaneous failure<br/>Ec2 Instances are on different physical hardware.                                   |           |
-| Cons           | If the rack fails, all instances fails at the same time.                                                                 | Limited to 7 instances per AZ per placement group.                                                                                                   |           |
-| Usecase        | Big Data job that needs to complete fast.<br/>Applications that needs extremely low latency and high network throughput. | Application that needs to maximize high availablility.<br/>Critical applications where each instances must be isolated from failure from each other. |           |
+|                | Cluster                                                                                                                  | Spread                                                                                                                                               | Partition                                                                                                                                                                                                                                                                                 |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Characteristic | Same rack, same AZ<br/>(low latency, 10Gbps network)                                                                     | Different rack, different AZ                                                                                                                         | Can span across multiple AZs in the same region.                                                                                                                                                                                                                                          |
+| Pros           | Great network (10Gbps bandwidth network between instances)                                                               | Can span across AZs<br/>Reduced risk of simultaneous failure<br/>Ec2 Instances are on different physical hardware.                                   | Upto to 100s of EC2 instances.<br/>The instances in a partition do not share racks with the instances in the other partitions.<br/>A partition failure can affect many EC2 but won't affect other partitions.<br/><br/>EC2 instances get access to the partition information as metadata. |
+| Cons           | If the rack fails, all instances fails at the same time.                                                                 | Limited to 7 instances per AZ per placement group.                                                                                                   | Limited to 7 partitions per AZ                                                                                                                                                                                                                                                            |
+| Usecase        | Big Data job that needs to complete fast.<br/>Applications that needs extremely low latency and high network throughput. | Application that needs to maximize high availablility.<br/>Critical applications where each instances must be isolated from failure from each other. | HDFS, HBase, Cassandra, Kafka                                                                                                                                                                                                                                                             |
+
+To create a placement group, 
+
+1. We go to `Networking and Security` > `Placement Groups`.
+
+2. Provide a Name, `Placement Strategy` (Cluster/Spread/Partition) and Tags (if required).
+
+Now while creating an EC2 Instance, within `Configure Instance`, see `Placement Group`
+
+> You can leave the created `Placement Groups`, you will not be charged any money for idle PGs.
 
 ## Elastic Network Interfaces (ENI) - Overview
+
+They are logical component in a VPC that represents a <span style="color:cyan">*virtual network card*</span>.
 
 ## ENI - Extra Reading
 
