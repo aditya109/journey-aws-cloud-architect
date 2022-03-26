@@ -106,12 +106,51 @@ They are logical component in a VPC that represents a <span style="color:cyan">*
 
 Go to `Networking and Security` > `Network Interfaces`.
 
-To create a new ENI, we give a name, assign a `Subnet` (has to be in the same AZ as the EC2 instance)
+To create a new ENI, 
 
-> Elastic Fabric Adapter is a network interface for Amazon EC2 instances that enables customers to run applications requiring high levels of inter-node communications at scale on AWS. 
+1. We give a name.
+
+2. Assign a `Subnet` (has to be in the same AZ as the EC2 instance).
+
+3. Get a private IPv4 address.
+
+4. Attach a Security Group. 
+
+> Elastic Fabric Adapter is a network interface for Amazon EC2 instances that enables customers to run applications requiring high levels of inter-node communications at scale on AWS. *Look into Elastic Fabric Adapter. [Elastic Fabric Adapter — Amazon Web Services](https://aws.amazon.com/hpc/efa/)*
+> 
+> Its custom-built OS bypass hardware interface enhances the performance of inter-instance communications, which is critical to scaling these applications. 
+
+Now we can attach it to our instance. (From `Actions`)
+
+> Main advantage here is drastic reduction in network failover, meaning we can switch the same ENI between multiple instances.
 
 ## ENI - Extra Reading
 
+[New – Elastic Network Interfaces in the Virtual Private Cloud | AWS News Blog](https://aws.amazon.com/blogs/aws/new-elastic-network-interfaces-in-the-virtual-private-cloud/)
+
 ## EC2 Hibernate
+
+We know we can stop, terminate instances:
+
+- `Stop`: the data on disk (EBS) is kept intact in the next start.
+
+- `Terminate`: any EBS volumes (root) also set-up to be destroyed is lost.
+
+On start, the following happens:
+
+- First start: the OS boots & the EC2 UserData script is run.
+
+- Following starts: the OS boots up.
+
+- The your application starts, caches get warmed up and that can take time.
+
+**To resolve this issue, we use EC2 Hibernate.**
+
+- The in-memory (RAM) state is preserved.
+
+- The instance boot is much faster ! (the OS is not stopped / restarted)
+  Actually the RAM state us written to a file in the root EBS volume.
+
+- The root EBS volume must be encrypted.
 
 ## EC2 Advanced concepts
