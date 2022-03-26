@@ -153,4 +153,30 @@ On start, the following happens:
 
 - The root EBS volume must be encrypted.
 
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/03-ec2-solutions-architect-associate-level/assets/ec2-hibernate.svg)
+
+- Supported instance families - C3, C4, C5, M3, M4, M5, R3, R4 and R5.  
+
+- Instance RAM size - must be less than 150 GB.
+
+- Instance size - not supported for bare metal instances.
+
+- AMI: Amazon Linux 2, Linux AMI, Ubuntu ... & WIndows
+
+- Root Volume: must be EBS, encrypted, not instance store and large
+
+- Available for On-Demand and Reserved Instances.
+
+- An instance cannot be hibernated more than 60 days.
+
+**Hands On**
+
+To enable EC2-Hibernate, while creating an EC2 instance, in `Configure Instance`,
+
+- Look for `Stop -Hibernate Behaviour` and enable `hibernatation as an additional stop behaviour`. 
+  
+  > We need to make sure that the root volume has more storage than RAM on the instance and that the encryption on root volume is `Enabled`. 
+
+
+
 ## EC2 Advanced concepts
