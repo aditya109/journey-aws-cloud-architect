@@ -16,7 +16,7 @@
       - [Security Groups Diagram](#security-groups-diagram)
     + [Referencing other security groups](#referencing-other-security-groups)
     + [Classic Ports to know](#classic-ports-to-know)
-  * [## SSH Overview](#---ssh-overview)
+  * [SSH Overview](#ssh-overview)
   * [SSH Troubleshooting](#ssh-troubleshooting)
   * [EC2 Instance connect](#ec2-instance-connect)
   * [EC2 Instance roles demo](#ec2-instance-roles-demo)
@@ -30,6 +30,8 @@
       - [EC2 Dedicated Hosts](#ec2-dedicated-hosts)
         * [EC2 Dedicated Instances](#ec2-dedicated-instances)
     + [Purchasing options - Hotel analogy](#purchasing-options---hotel-analogy)
+  * [Spot Instances & Spot Fleet](#spot-instances---spot-fleet)
+    + [Spot Fleets](#spot-fleets)
 
 # EC2 Fundamentals
 

@@ -1,5 +1,17 @@
 Table of Contents
 
+- [EC2 - Solutions Architect Associate Level](#ec2---solutions-architect-associate-level)
+  * [Private vs Public vs Elastic IP](#private-vs-public-vs-elastic-ip)
+  * [EC2 Placement Groups](#ec2-placement-groups)
+  * [Elastic Network Interfaces (ENI) - Overview](#elastic-network-interfaces--eni----overview)
+    + [Hands-On](#hands-on)
+  * [ENI - Extra Reading](#eni---extra-reading)
+  * [EC2 Hibernate](#ec2-hibernate)
+  * [EC2 Advanced concepts](#ec2-advanced-concepts)
+    + [EC2 Nitro](#ec2-nitro)
+    + [EC2 - Understanding CPU](#ec2---understanding-cpu)
+    + [EC2 - Capacity Reservations](#ec2---capacity-reservations)
+
 # EC2 - Solutions Architect Associate Level
 
 ## Private vs Public vs Elastic IP
