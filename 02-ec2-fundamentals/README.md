@@ -200,7 +200,7 @@ They regulate:
 | 443  | HTTPS                                | access secured websites        |
 | 3389 | RDP (Remote Desktop Protocol)        | log into a Windows instance    |
 
-## ## SSH Overview
+## SSH Overview
 
 We can connect to EC2 via:
 

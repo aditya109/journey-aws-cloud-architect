@@ -100,7 +100,7 @@ They are logical component in a VPC that represents a <span style="color:cyan">*
 
 - You can create ENI independently and attach them on the fly (move them) on EC2 instances for failover.
 
-- Bound to a specific AZ.
+- <span style="color:orange">Bound to a specific AZ.</span>
 
 ### Hands-On
 
@@ -163,7 +163,7 @@ On start, the following happens:
 
 - AMI: Amazon Linux 2, Linux AMI, Ubuntu ... & WIndows
 
-- Root Volume: must be EBS, encrypted, not instance store and large
+- Root Volume: must be EBS, encrypted, <span style="color:orange">not instance store and large</span>
 
 - Available for On-Demand and Reserved Instances.
 
@@ -177,6 +177,59 @@ To enable EC2-Hibernate, while creating an EC2 instance, in `Configure Instance`
   
   > We need to make sure that the root volume has more storage than RAM on the instance and that the encryption on root volume is `Enabled`. 
 
-
-
 ## EC2 Advanced concepts
+
+### EC2 Nitro
+
+- Underlying platform for the next generation of EC2 instances.
+
+- Better and new virtualization technology.
+
+- Allows for better performance:
+  
+  - Better networking options (enhanced networking, HPC, IPv6)
+  
+  - Higher Speed EBS (Nitro is necessary for 64k EBS IOPS (max 32k on non-Nitro instances))
+
+- Better underlying security.
+
+- Instance type example: Virtualized (A1, C5, M5a, etc.,), Bare Metal (a1.metal, c5.metal, etc.)
+
+### EC2 - Understanding CPU
+
+- Multiple threads can run on one CPU (multithreading)
+
+- Each thread is represented as a virtual CPU (vCPU)
+
+For example, for `m5.2xlarge`, we have 4 CPU, 8 threads (***8 vCPU***)
+
+**What is the point here ? 🤔**
+
+EC2 instances come with a combination of RAM and vCPU. But in some cases, you may want to chance the vCPU options:
+
+- `#` of CPU cores: you can decrease it (helpful if you need high RAM and low number of CPU) - to decrease licensing costs.
+
+- `#` of threads per core: disable multithreading to 1 thread per CPU 0 helpful for HPC workloads.
+
+<span style="color:orange">Only specified during instance launch</span>.
+In `CPU Options` > check `Specify CPU options` and there you can do the adjustment.
+
+### EC2 - Capacity Reservations
+
+- Capacity Reservations ensure you have EC2 Capacity when needed.
+
+- Manual or planned end-date for the reservation.
+
+- No need for 1 or 3-year commitment.
+
+- Capacity access is immediate, you get billed as soon as it starts.
+
+You need specify the following for creating such instances:
+
+- The AZ in which to reserve the capacity (only one)
+
+- The # of instances for which to reserve capacity
+
+- The instance attributes, including the instance type, tenancy and platform/OS.
+
+> Combine with Reserved Instances and Savings Plans to do cost saving.
