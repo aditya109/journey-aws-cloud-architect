@@ -1,7 +1,5 @@
 Table of Contents
 
-
-
 # EC2 Instance Storage
 
 ## EBS Overview
@@ -109,10 +107,10 @@ xvdf    202:80   0   10G  0 disk
       
       ```bash
       [ec2-user ~]$ sudo lsblk -f
-      NAME		       FSTYPE	LABEL	UUID		               				MOUNTPOINT
-      nvme1n1	           xfs		        7f939f28-6dcc-4315-8c42-6806080b94dd                              
+      NAME               FSTYPE    LABEL    UUID                                       MOUNTPOINT
+      nvme1n1               xfs                7f939f28-6dcc-4315-8c42-6806080b94dd                              
       nvme0n1                                                                                          
-      ├─nvme0n1p1	       xfs	    /	    90e29211-2de8-4967-b0fb-16f51a6e464c	/
+      ├─nvme0n1p1           xfs        /        90e29211-2de8-4967-b0fb-16f51a6e464c    /
       └─nvme0n1p128                                                                             # does not have file system
       nvme2n1                                                                                   # does not have file system 
       ```
@@ -148,7 +146,7 @@ https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html
 
 To mount an attached EBS volume on every system reboot, add an entry for the device to the `/etc/fstab` file.
 
-You can use the device name 
+You can use the device name, such as `/dev/xvdf`, in `/etc/fstab`, but it is recommeneded using the device's 128-bit UUID
 
 ## EBS Snapshots Overview
 
@@ -169,7 +167,5 @@ Amazon EBS Multi-Attach enables you to attach a single Provisioned IOPS SSD (`io
 ## EFS Overview
 
 ## EFS vs EBS
-
-
 
 # 
