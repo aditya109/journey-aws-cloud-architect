@@ -146,9 +146,59 @@ https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html
 
 To mount an attached EBS volume on every system reboot, add an entry for the device to the `/etc/fstab` file.
 
-You can use the device name, such as `/dev/xvdf`, in `/etc/fstab`, but it is recommeneded using the device's 128-bit UUID
+You can use the device name, such as `/dev/xvdf`, in `/etc/fstab`, but it is recommeneded using the device's 128-bit UUID instead.
+
+> Device names can change, but the UUID persists throughout the life of the partition.
+
+By using the UUID, you reduce the chances that the system becomes unbootable after a hardware reconfiguration.
+
+1. *(Optional)* Create a backup of your `/etc/fstab` file that you can use if you accidentally destroy or delete this file while editing it.
+   
+   ```bash
+   sudo cp /etc/fstab /etc/fstab.orig
+   ```
+
+2. Use `blkid` command to find the UUID of the device and note it down, as it would be used on other places as well.
+   
+   ```bash
+   sudo blkid
+   # or for Ubuntu 18.04
+   sudo blkid -o +UUID
+   ```
+
+3. Edit `/etc/fstab` and add the following entry to mount the device at the specified mount point. For example, we want to mount `<MY_MOUNT_UUID>` at mount `/data` and we use the `xfs` file system. We also use the `defaults` and `nofail` flags.
+   We specify `0` to prevent the file system from being dumped, and we specify `2` to indicate that it is a non-root device.
+   
+   ```bash
+   UUID=<MY_MOUNT_UUID> /data xfs defaults,nofail 0 2
+   ```
+   
+   > `nofail` mount option enables the instance to boot even if there are errors  mounting the volume. For Debian derivatives, including Ubuntu 16.04, must also add the `nobootwait` mount option.
+
+4. To verify whether your entry works, run the following commands to unmount the device and then mount all the file systems in `/etc/fstab`. If there are no errors, the `/etc/fstab` file is OK and your file system will automatically mounted after it it rebooted.
+   
+   ```bash
+   sudo umount /data && sudo mount -a
+   # if you receive an error message, address the errors in the file
+   ```
+   
+   > Errors in the `/etc/fstab` file can render a system unbootable. Do not shutdown a system that has errors in the `/etc/fstab` file.
+   > 
+   > If all fails, you can restore the original `fstab.orig` file to the current one.
+   > 
+   > ```bash
+   > sudo mv /etc/fstab.orig /etc/fstab
+   > ```
 
 ## EBS Snapshots Overview
+
+- We can make a backup (snapshot) of your EBS volume at a point in time.
+
+- We do not need to necessarily detach volume to do snapshot, but recommended.
+
+- We can copy snapshots across AZ or region. 
+
+
 
 ## AMI Overview
 
