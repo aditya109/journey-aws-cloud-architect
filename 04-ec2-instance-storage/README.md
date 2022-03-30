@@ -198,8 +198,6 @@ By using the UUID, you reduce the chances that the system becomes unbootable aft
 
 - We can copy snapshots across AZ or region. 
 
-
-
 ## AMI Overview
 
 ## EC2 Instance Store
