@@ -198,6 +198,20 @@ By using the UUID, you reduce the chances that the system becomes unbootable aft
 
 - We can copy snapshots across AZ or region. 
 
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/04-ec2-instance-storage/assets/snapshots.svg)
+
+**Hands-On**
+
+1. Select the EBS volume and click on `Actions` > `Create Snapshot`.
+
+2. 
+
+
+
+
+
+
+
 ## AMI Overview
 
 ## EC2 Instance Store
