@@ -204,15 +204,51 @@ By using the UUID, you reduce the chances that the system becomes unbootable aft
 
 1. Select the EBS volume and click on `Actions` > `Create Snapshot`.
 
-2. 
-
-
-
-
-
-
+2. Once done, go to `Volumes` > `Snapshots` > select your snapshot > `Actions`.
+   
+   - Within actions, we can do the following:
+     
+     - Delete
+     
+     - Create Volume
+     
+     - Manage Fast Snapshot Restore
+     
+     - Create Image
+     
+     - Copy
+     
+     - Modify Permissions
+     
+     - Add/Edit Tags
 
 ## AMI Overview
+
+Amazon Machine Image or AMI, is a customization of an EC2 instance. 
+
+- You add your own software, configuration, operating system, monitoring, etc.
+
+- Faster boot/configuration time because all your software is pre-packaged.
+
+- AMI are built for a **specific** region (but can be copied across regions).
+
+You can launch EC2 instances from:
+
+- **A Public AMI**: AWS provided
+
+- **Your own AMI**: you make and maintain them yourself
+
+- **AN AWS Marketplace AMI**: an AMI someone else made (and potentially sells)
+
+**Hands On**
+
+https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/26098284#overview
+
+1. Create a normal EC2 instance and install your dependencies and required softwares.
+
+2. Once every thing is done, right-click on the instance and go to `Images and Templates` > `Create an Image`.
+
+3. Now we can create an instance from our AMI. 
 
 ## EC2 Instance Store
 
