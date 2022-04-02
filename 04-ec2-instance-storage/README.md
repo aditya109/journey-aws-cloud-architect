@@ -1,5 +1,21 @@
 Table of Contents
 
+- [EBS Overview](#ebs-overview)
+  * [EBS in detail](#ebs-in-detail)
+  * [**EBS Hands On**](#--ebs-hands-on--)
+    + [To format and mount an EBS volume on Linux](#to-format-and-mount-an-ebs-volume-on-linux)
+    + [Automatically mount an attached volume after reboot](#automatically-mount-an-attached-volume-after-reboot)
+- [EBS Snapshots Overview](#ebs-snapshots-overview)
+- [AMI Overview](#ami-overview)
+- [EC2 Instance Store](#ec2-instance-store)
+- [EBS Volume Types](#ebs-volume-types)
+- [EBS Multi-Attach](#ebs-multi-attach)
+- [EBS Encryption](#ebs-encryption)
+- [EFS Overview](#efs-overview)
+- [EFS vs EBS](#efs-vs-ebs)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 # EC2 Instance Storage
 
 ## EBS Overview
@@ -321,14 +337,65 @@ When we create an encrypted EBS volume, we get the following by-default:
 
 ## EFS Overview
 
-Elastic File System, or managed NFS than can be mounted on many EC2.
+Elastic File System, or managed NFS than can be mounted on many EC2 (shared NFS).
 
-- It works with EC2 instances in multi-AZ.
+- It works with EC2 instances in multi-AZ;
 
-- Highly available, scalable, expensive (*3 times gp2*), pay per use.
+- Highly available, scalable, expensive (*3 times gp2*), pay per use;
 
-- 
+- uses NFSv4.1 protocol;
+
+- uses security group to control access to EFS;
+
+- compatible with Linux based AMI (not Windows);
+
+- uses encryption at rest using KMS;
+
+- POSIX file system that has a standard file API;
+
+- file system scales automatically, pay-per-use, no capacity planning;
+
+- scale - 
+  
+  - 1000s of concurrent NFS clients, 10GB+/s throughput
+  
+  - grow to pentabyte-scale network file system, automatically
+
+- performance mode (set at EFS creation time)-
+  
+  - general purpose (default): latency -sensitive usecases (web server, CMS, etc)
+  
+  - max I/O - higher latency, throughput, highly parallel (big data, media processing)
+
+- throughput mode-
+  
+  - bursting (1 TB = 50 MiB/s + burst of upto 100 MiBs)
+  
+  - provisioned: set your throughput regardles of storage size, ex: 1 GiB/s for 1 TB storage
+
+- storage tiers (lifecycle management feature - move file after N days)
+  
+  - standard: for frequently accessed files
+  
+  - infrequent access (EFS-IA: cost to retrieve files, lower price to store) 
+
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/04-ec2-instance-storage/assets/efs.svg)
+
+Usecases:
+
+- content management, web serving, data sharing, wordpress
+
+**Hands-On: creating EFS**
+
+https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/13528130#overview
 
 ## EFS vs EBS
 
-# 
+| EBS                                                                                                               | EFS                                                 |
+| ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| can be attached to only one instance at a time                                                                    | mounting possible across 100s of instance across AZ |
+| are locked at AZ level                                                                                            | only for Linux Instance (POSIX)                     |
+| IO can increase either with disk size (`gp2`) or independently (`io1`)                                            | EFS has a higher price point than EBS.              |
+| to migrate an EBS volume, we take a snapshot and restore it onto another volume in different AZ                   | can leverage EFS-IA for cost saving.                |
+| EBS backups use IO and can't be run while running application is handling a lot of traffic.                       |                                                     |
+| Root EBS volumes of instances gets terminated by default if the EC2 instance gets terminated. (*can be disabled*) |                                                     |
