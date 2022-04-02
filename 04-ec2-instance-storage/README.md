@@ -240,7 +240,7 @@ You can launch EC2 instances from:
 
 - **AN AWS Marketplace AMI**: an AMI someone else made (and potentially sells)
 
-**Hands On**
+**Hands On - creating a custom AMI**
 
 https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/26098284#overview
 
@@ -252,17 +252,82 @@ https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02
 
 ## EC2 Instance Store
 
+- EBS volumes are **network drives** with good but "limited" performance. Hence, if you need a high-performance hardware disk, use EC2 Instance Store.
+
+- Better I/O performance
+
+- EC2 Instance Store lose their storage if they're stopped (euphemeral).
+
+- Good for buffer/cache/scratch data/temporary content.
+
+- Risk of data loss if hardware fails.
+
+- Backups and replication are your responsibility.
+
+<span style="color:orange">look into local EC2 Instance Store</span>.
+
 ## EBS Volume Types
+
+EBS volumes come in 6 types:
+
+| Volume type     | Description                                                                                                                                                                                                         | Remarks                                                         |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `gp2/gp3 (SSD)` | General purpose SSD volume that balances price and performance for a wide variety of workloads. Can be used for system boot volumes, virtual desktops, development and test environments.                           | <span style="color:limegreen">can be used as boot volume</span> |
+| `io1/io2 (SSD)` | Highest performance SSD volume for mission-critical low-latency or high-throughput workloads. Great for databases workloads (sensitive to storage performance and consistency) or apps requiring more than 16k IOPS | <span style="color:limegreen">can be used as boot volume</span> |
+| `st1 (HDD)`     | Low cost HDD volume designed for frequently accessed, throughput -intensive workloads. For big data, data warehousing, log processing, etc.                                                                         | <span style="color:crimson">not supported</span>                |
+| `sc1 (HDD)`     | Lowest cost HDD volume designed for less frequently accessed workloads. For data that is infrequently accessed                                                                                                      | <span style="color:crimson">not supported</span>                |
+
+EBS volumes are characterized in <span style="color:orange">size | throughput | IOPS (I/O ops per sec)</span>. 
+
+| Volume Type                    | Volume Example      | Remarks                                                                    | Size available   | Throughput       | IOPS                                                                                    |
+| ------------------------------ | ------------------- | -------------------------------------------------------------------------- | ---------------- | ---------------- | --------------------------------------------------------------------------------------- |
+| General Purpose Instance (SSD) | `gp2`               | cost-effective storage, low latency                                        | 1 Gib - 16 TiB   |                  | size of volume and IOPS are linked 3k to 16k                                            |
+| General Purpose Instance (SSD) | `gp3`               | cost-effective storage, low latency                                        | 1 Gib - 16 TiB   | 125 - 1000 MiB/s | 3k - 16k                                                                                |
+| Provisioned IOPS SSD           | `io1/io2`           | `io2` is more durable and gives more IOPS per GiB (at same price as `io1`) | 4 GiB - 16 TiB   |                  | PIOPS 64k for Nitro EC2 and 32k for other (can be increased independently from storage) |
+| Provisioned IOPS SSD           | `io2 Block Express` | sub-milisecond latency; supports EBS Multi-Attach                          | 4 GiB - 64 TiB   |                  | Max PIOPS = ~256k with IOPS:GiB ratio of 1k:1                                           |
+| HDD                            | `st1`               | optimized HDD                                                              | 125 MiB - 16 TiB | ~500 MiB/s       | ~500 IOPS                                                                               |
+| HDD                            | `sc1`               | lowest cost                                                                |                  | ~250 MiB/s       | ~250 IOPS                                                                               |
 
 ## EBS Multi-Attach
 
-Amazon EBS Multi-Attach enables you to attach a single Provisioned IOPS SSD (`io1` or `io2`) volume to multiple instances that are in the same AZ. You can attach multiple Multi-Attach enabled volumes to an instance or set of instances. Each instance to which the volume is attached has full read and write permission to the shared volume. 
+Amazon EBS Multi-Attach enables you to attach a single <span style="color:yellow">Provisioned IOPS SSD (`io1` or `io2`) volume </span> to multiple instances that are in the same AZ. You can attach multiple Multi-Attach enabled volumes to an instance or set of instances. Each instance to which the volume is attached has full read and write permission to the shared volume. 
 
-<span style="color:limegreen">It makes it easier for you to achieve higher application availability in clustered Linux applications that manage concurrent write operations. </span>
+>  <span style="color:yellow">**Must use a file system that's cluster-aware (not xfs, ex4, etc...)**.</span>
+>  <span style="color:limegreen">It makes it easier for you to achieve higher application availability in clustered Linux applications that manage concurrent write operations. </span>
 
 ## EBS Encryption
 
+When we create an encrypted EBS volume, we get the following by-default:
+
+1. Data at rest is encrypted inside the volume.
+
+2. All the data in flight moving between the instance and volume is encrypted.
+
+3. All snapshots are encrypted.
+
+4. All volumes created from the snapshot.
+
+> Encryption has a minimal impact on latency. EBS encryption leverages keys from KMS (AES-256).
+
+**Hands-on - encrypt an unencrypted EBS volume**
+
+1. Create an EBS snapshot of the volume.
+
+2. Encrypt the EBS snapshot (using copy) or we can use the snapshot to create volume and encrypt the volume.
+
+3. Create new EBS volume from the snapshot (the volume will also be encrypted.)
+
+4. Now you can attach the encrypted volume to the EC2 instance.
+
 ## EFS Overview
+
+Elastic File System, or managed NFS than can be mounted on many EC2.
+
+- It works with EC2 instances in multi-AZ.
+
+- Highly available, scalable, expensive (*3 times gp2*), pay per use.
+
+- 
 
 ## EFS vs EBS
 
