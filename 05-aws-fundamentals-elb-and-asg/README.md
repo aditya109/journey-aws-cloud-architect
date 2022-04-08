@@ -66,6 +66,35 @@ An Elastic Load Balancer is
 
 ### Health Checks
 
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/05-aws-fundamentals-elb-and-asg/assets/health-check.svg)
+
+- Health checks are crucial for Load Balancers
+
+- They enable the lb to know if the instances it forwards traffic to are available to reply to requests.
+
+- The health check is done on a port and a route (/health is common)
+
+- If the reponse is not 200 (OK), then the instance is unhealthy
+
+#### Types of LBs
+
+AWS has 4 kinds of managed Load Balancers:
+
+| LB type              | Year of Launch | Supported Protocol                                | Remarks             |
+| -------------------- | -------------- | ------------------------------------------------- | ------------------- |
+| Classic LB - CLB     | 2009           | HTTP, HTTPS, TCP, SSL (secure TCP)                | v1 - old generation |
+| Application LB - ALB | 2016           | HTTP, HTTPS, WebSocket                            | v2 - new generation |
+| Network LB - NLB     | 2017           | TCP, TLS (secure TCP), UDP                        | v2 - new generation |
+| Gateway LB - GWLB    | 2020           | Operates at layer 3 (Network layer) - IP Protocol | latest              |
+
+> It is recommended to use the newer generation lbs as they provide more features.
+> 
+> Some lbs can be setup as internal (private) or external (public) ELBs.
+
+#### LB Security Groups
+
+
+
 ### Sticky Sessions
 
 ### Cross Zone Load Balancing
