@@ -116,9 +116,32 @@ AWS has 4 kinds of managed Load Balancers:
 
 - Fixed hostname: `XXX.region.elb.amazonAWS.com`
 
-
-
 **Hands-On**
+
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/05-aws-fundamentals-elb-and-asg/assets/clb-hands-on.svg)
+
+1. Launch an EC2 instance with a application running.
+
+2. Go to `Load Balancers`. 
+
+3. Create a load balancer > Click on `Classic Load Balancer`.
+
+4. Enter details in `Define Load Balancer`.
+   
+   1. Within `Basic Configuration`, 
+      
+      - Select `Create an internal load balancer` if you want to make a private lb.
+        
+        > Next we have protocol:port rules.
+        > 
+        > | Key               | Value |
+        > | ----------------- | ----- |
+        > | LB Protocol       | HTTP  |
+        > | LB Port           | 80    |
+        > | Instance Protocol | HTTP  |
+        > | Instance Port     | 80    |
+   
+   2. 
 
 ## ALB
 
