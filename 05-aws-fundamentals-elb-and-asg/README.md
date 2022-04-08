@@ -66,10 +66,6 @@ An Elastic Load Balancer is
 
 ### Health Checks
 
-
-
-
-
 ### Sticky Sessions
 
 ### Cross Zone Load Balancing
@@ -99,41 +95,3 @@ An Elastic Load Balancer is
 **Hands-On**
 
 ### Scaling Policies
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
