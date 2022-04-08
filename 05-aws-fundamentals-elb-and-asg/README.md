@@ -93,7 +93,12 @@ AWS has 4 kinds of managed Load Balancers:
 
 #### LB Security Groups
 
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/05-aws-fundamentals-elb-and-asg/assets/lb-security-group.svg)
 
+|                                               | LB Security Group                             | Application Security Group (allow traffic only from lb) |
+| --------------------------------------------- | --------------------------------------------- | ------------------------------------------------------- |
+| *type-protocol-port range-source-description* | HTTP-TCP-80-0.0.0.0/0-allow HTTP from an....  | HTTP-TCP-80-`sg-ID1`-allow HTTP from an....             |
+| *type-protocol-port range-source-description* | HTTP-TCP-443-0.0.0.0/0-allow HTTP from an.... |                                                         |
 
 ### Sticky Sessions
 
@@ -103,7 +108,15 @@ AWS has 4 kinds of managed Load Balancers:
 
 ### Connection Draining
 
-## CLB
+## CLB (v1)
+
+- Supports TCP (layer 4), HTTP & HTTPS (layer 7)
+
+- Health checks are TCP or HTTP based
+
+- Fixed hostname: `XXX.region.elb.amazonAWS.com`
+
+
 
 **Hands-On**
 
