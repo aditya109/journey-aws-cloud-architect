@@ -163,7 +163,7 @@ Open the DNS name from the CLB info section.
 > 
 > You can change security groups Inbound rules, by delete the existing HTTP rule <span style="color:orange">Source</span>, and then create a new rule with the <span style="color:orange">Source</span> being the CLB security group.
 
-## ALB (v2)
+## Application Load Balancer (v2)
 
 - ALB is Layer 7 (HTTP).
 
@@ -196,11 +196,13 @@ Open the DNS name from the CLB info section.
 > <span style="color:cyan">Good to know:</span>
 > 
 > - On creating an ALB, we get a fixed hostname (XXX.region.elb.amazonaws.com).
-> - The application servers don't see the IP of the client directly.
+> - The application servers don't see the IP of the client directly. In order for the EC2 instance to look for client IP, we need to look for the following:
 >   - The true IP of the client is inserted in the header **X-Forwarded-For**
->   - We can also get Port (**X-Forwarded-For**) and proto (X-Forwarded-Proto)
+>   - We can also get Port (**X-Forwarded-For**) and proto (**X-Forwarded-Proto**)
+> 
+> ![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/05-aws-fundamentals-elb-and-asg/assets/alb-request-forwarding.svg)
 
-### Target Groups
+### Target Group Possiblity for ALB
 
 - can be:
   
@@ -220,17 +222,59 @@ Open the DNS name from the CLB info section.
 
 ![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/05-aws-fundamentals-elb-and-asg/assets/alb-query-based-routing.svg)
 
-
-
-
-
-
-
 **Hands-On**
 
+1. Launch an EC2 instance with a application running.
+
+2. Go to `Load Balancers`.
+
+3. Create a load balancer > Click on `Application Load Balancer`.
+
+4. Select a `Scheme`.
+   
+   - A `Scheme` can be `Internet-facing` (routes requests from clients over the internet to targets. Requires a public subnet).
+   
+   - A `Scheme` can be `Internal` (routes requests from clients to targets using private IP addresses).
+
+5. Select an IP address type.
+   
+   - IPv4
+   
+   - Dualstack (IPv4 and IPv6)
+
+6. Select under Network mapping.
+   
+   1. Select VPC.
+   
+   2. Select Mappings (we need to select atleast 2 AZs and one subnet per zone, subnets can't be changed after the lb is created.)
+
+7. Select a security group.
+
+8. Specify Listeners and Routing.
+   
+   - Provide a target group.
+
+9- Create the ALB.
+
+## Network Load Balancer (v2)
+
+- Network load balancers (Layer 4) allow to :
+  
+  - Forward TCP and UDP traffic to your instances
+  
+  - Handle millions of requests per seconds
+  
+  - Less latency ~100ms (vs 400 ms for ALB)
+
+- NLB has one static IP per AZ, supports assigning Elastic IP (helpful in whitelisting specific IP)
+
+- NLB are used for extreme performance, TCP or UDP traffic.
 
 
-## NLB
+
+
+
+
 
 **Hands-On**
 
