@@ -151,11 +151,49 @@ AWS has 4 kinds of managed Load Balancers:
    
    7. Click to create.
 
-> The instances moves from 
+> The instances moves from <span style="color:orange">OutOfService</span> -> <span style="color:orange">InService</span>.
 
-## ALB
+Open the DNS name from the CLB info section.
+
+> *What could be wrong if say my instances are still* <span style="color:orange">OutOfService</span> ?
+> 
+> Possibly check security groups if say the HTTP rules are not present in the Inbound rules, the LB would not be able to forward requests to the instances.
+> 
+> *Ok, but right now I can access my instance directly from outside of the internet as well from the LB, how should I tighten the security?*
+> 
+> You can change security groups Inbound rules, by delete the existing HTTP rule <span style="color:orange">Source</span>, and then create a new rule with the <span style="color:orange">Source</span> being the CLB security group.
+
+## ALB (v2)
+
+- ALB is Layer 7 (HTTP).
+
+- It supports:
+  
+  - Load balancing to multiple HTTP apps across machines (target groups)
+  
+  - Load balancing to multiple apps on the same machine (ex. containers)
+
+- It supports:
+  
+  - For HTTP/2 and Websocket
+  
+  - Redirects (from HTTP to HTTPS)
+  
+  - Routing table to different target groups:
+    
+    - Routing based on path in URL (example.com/users & example.com/posts)
+    
+    - Routing based on hostname in URL (one.example.com & other.example.com)
+    
+    - Routing based on Query strings, Headers (example.com/users?id=123&order=false)
+  
+  - ALB is a great fit for microservices & container-based application (example, Docker, Amazon ECS)
+  
+  - Supports a port mapping feature to redirect to a dynamic port in ECS.
 
 **Hands-On**
+
+
 
 ## NLB
 
