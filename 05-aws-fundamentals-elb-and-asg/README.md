@@ -191,6 +191,26 @@ Open the DNS name from the CLB info section.
   
   - Supports a port mapping feature to redirect to a dynamic port in ECS.
 
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/05-aws-fundamentals-elb-and-asg/assets/alb-design.svg)
+
+### Target Groups
+
+- can be:
+  
+  - EC2 instances (can be managed by an Auto Scaling Group) - HTTP
+  
+  - ECS tasks (managed by ECS itself) - HTTP
+  
+  - Lambda functions - HTTP request is translated into a JSON event.
+
+- Target groups must have IP addresses - must be private IPs.
+
+- ALBs can route to multiple target groups.
+
+- Health checks are at the target group level.
+
+### Query strings/parameters routing
+
 
 
 **Hands-On**
