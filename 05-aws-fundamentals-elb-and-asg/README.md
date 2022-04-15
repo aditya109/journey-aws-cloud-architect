@@ -134,14 +134,24 @@ AWS has 4 kinds of managed Load Balancers:
         
         > Next we have protocol:port rules.
         > 
-        > | Key               | Value |
-        > | ----------------- | ----- |
-        > | LB Protocol       | HTTP  |
-        > | LB Port           | 80    |
-        > | Instance Protocol | HTTP  |
-        > | Instance Port     | 80    |
+        > | Key                    | Value   |
+        > | ---------------------- | ------- |
+        > | LB Protocol:Port       | HTTP:80 |
+        > | Instance Protocol:Port | HTTP:80 |
    
-   2. 
+   2. Assign a Security Group.
+   
+   3. Configure Security Settings.
+   
+   4. Configure Health Check. (*health check response timeout < health check interval*)
+   
+   5. Add EC2 Instances.
+   
+   6. Add Tags.
+   
+   7. Click to create.
+
+> The instances moves from 
 
 ## ALB
 
