@@ -191,6 +191,8 @@ Open the DNS name from the CLB info section.
   
   - Supports a port mapping feature to redirect to a dynamic port in ECS.
 
+
+
 **Hands-On**
 
 
