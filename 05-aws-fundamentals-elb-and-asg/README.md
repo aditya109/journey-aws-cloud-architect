@@ -193,6 +193,13 @@ Open the DNS name from the CLB info section.
 
 ![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/05-aws-fundamentals-elb-and-asg/assets/alb-design.svg)
 
+> <span style="color:cyan">Good to know:</span>
+> 
+> - On creating an ALB, we get a fixed hostname (XXX.region.elb.amazonaws.com).
+> - The application servers don't see the IP of the client directly.
+>   - The true IP of the client is inserted in the header **X-Forwarded-For**
+>   - We can also get Port (**X-Forwarded-For**) and proto (X-Forwarded-Proto)
+
 ### Target Groups
 
 - can be:
@@ -210,6 +217,12 @@ Open the DNS name from the CLB info section.
 - Health checks are at the target group level.
 
 ### Query strings/parameters routing
+
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/05-aws-fundamentals-elb-and-asg/assets/alb-query-based-routing.svg)
+
+
+
+
 
 
 
