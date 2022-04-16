@@ -202,7 +202,7 @@ Open the DNS name from the CLB info section.
 > 
 > ![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/05-aws-fundamentals-elb-and-asg/assets/alb-request-forwarding.svg)
 
-### Target Group Possiblity for ALB
+### Target Group Possiblities for ALB
 
 - can be:
   
@@ -270,15 +270,57 @@ Open the DNS name from the CLB info section.
 
 - NLB are used for extreme performance, TCP or UDP traffic.
 
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/05-aws-fundamentals-elb-and-asg/assets/nlb-design.svg)
 
+### Target Group Possiblities for NLB
 
+- EC2 Instances
 
+- IP Addresses - must be private IPs
 
-
+- ALB
 
 **Hands-On**
 
-## GWLB
+- Launch an EC2 instance with a application running.
+
+- Go to `Load Balancers`.
+
+- Create a load balancer > Click on `Network Load Balancer`.
+
+- Select a `Scheme`.
+  
+  - A `Scheme` can be `Internet-facing` (routes requests from clients over the internet to targets. Requires a public subnet).
+  
+  - A `Scheme` can be `Internal` (routes requests from clients to targets using private IP addresses).
+
+- Select an IP address type.
+  
+  - IPv4
+  
+  - Dualstack (IPv4 and IPv6)
+
+- Select under Network mapping.
+  
+  1. Select VPC.
+  
+  2. Select Mappings (we need to select atleast 2 AZs and one subnet per zone, subnets can't be changed after the lb is created.)
+  
+  >  For security group, the sg for instances is itself undertaken by the NLB.
+
+- Specify Listeners and Routing.
+  
+  - Provide a target group.
+
+- Create the NLB.
+
+> If we directly try to open the URL of NLB, it would be inaccessible, the probable reason would be that the instances are unhealthly. In order to fix that, edit the security groups of the target group, to add in an <span style="color:orange">Inbound Rule</span>, for <span style="color:orange">HTTP</span> type traffic  with <span style="color:orange">TCP</span> Protocol under port <span style="color:orange">80</span>, allowing Source as 0.0.0.0/0 (anywhere), which is required for NLB.
+
+## Gateway Load Balancer
+
+- It is used to deploy, scale and manage a fleet of 3<sup>rd</sup> party network virtual appliances in AWS.
+
+- Example: Firewalls, Intrusion Detection and Prevention Systems, Deep Packet Inspection Systems, payload manipulation, etc.
 
 **Hands-On**
 
