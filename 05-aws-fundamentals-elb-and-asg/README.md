@@ -182,9 +182,29 @@ With <span style='color:blue'>**No Cross Zone Load Balancing**</span>, requests 
 - Public SSL certificates are issued by Certificate Authority (CA). E.g., Comodo, Symantec, GoDaddy, GlobalSign, Digicert, Letsencrypt, etc.
 - SSL certificates have an expiration date (you set) and must be renewed.
 
- ![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/05-aws-fundamentals-elb-and-asg/assets/.svg)
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/05-aws-fundamentals-elb-and-asg/assets/SSL.svg)
 
-- 
+- The load balancer uses an X.509 certificate (SSL/TLS server certificate).
+- We can manage certificate using ACM (AWS Certificate Manager).
+- We can create upload our own certificates alternatively.
+- HTTPS listeners:
+  - A default certificate must be specified.
+  - An optional list of certificates to support multiple domains.
+  - Clients can use SNI (Server Name Indication) to specify the hostname they reach.
+  - Ability to specify a security policy to support older versions of SSL/TLS (legacy clients)
+
+### SSL - Server Name Indication
+
+- SNL solves the problem of loading multiple SSL certificates onto one web server (to server multiple websites).
+- It's a *newer* protocol, and requires the client to **indicate** the hostname of the target server in the initial SSL handshake.
+- The server will then find the correct certificate, or return the default one.
+
+> Note:
+>
+> 1. Only works for ALB & NLB (newer generation, CloudFront)
+> 2. Does not work for CLB (older generation)
+
+
 
 ### Connection Draining
 
