@@ -150,7 +150,7 @@ With <span style='color:blue'>**No Cross Zone Load Balancing**</span>, requests 
 
 ![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/05-aws-fundamentals-elb-and-asg/assets/elb-no-cross-zone-balancing.svg)
 
-### Cross Zone Load Balancing Feature Availability on Load Balancer
+#### Cross Zone Load Balancing Feature Availability on Load Balancer
 
 - Application Load Balancer
 
@@ -193,7 +193,7 @@ With <span style='color:blue'>**No Cross Zone Load Balancing**</span>, requests 
   - Clients can use SNI (Server Name Indication) to specify the hostname they reach.
   - Ability to specify a security policy to support older versions of SSL/TLS (legacy clients)
 
-### SSL - Server Name Indication
+#### SSL - Server Name Indication
 
 - SNL solves the problem of loading multiple SSL certificates onto one web server (to server multiple websites).
 - It's a *newer* protocol, and requires the client to **indicate** the hostname of the target server in the initial SSL handshake.
@@ -203,6 +203,18 @@ With <span style='color:blue'>**No Cross Zone Load Balancing**</span>, requests 
 >
 > 1. Only works for ALB & NLB (newer generation, CloudFront)
 > 2. Does not work for CLB (older generation)
+
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/05-aws-fundamentals-elb-and-asg/assets/sni-design.svg)
+
+#### ELB - SSL Certificates
+
+- **Classic Load Balancer (v1)**
+  - Support only one SSL certificate
+  - Must use multiple CLB for multiple hostname with multiple SSL certificates
+- **Application Load Balancer (v2)**
+  - Supports mutliple listeners with multiple SSL certificates/
+
+
 
 
 
