@@ -209,16 +209,56 @@ With <span style='color:blue'>**No Cross Zone Load Balancing**</span>, requests 
 #### ELB - SSL Certificates
 
 - **Classic Load Balancer (v1)**
-  - Support only one SSL certificate
-  - Must use multiple CLB for multiple hostname with multiple SSL certificates
+  - Support only one SSL certificate.
+  - Must use multiple CLB for multiple hostname with multiple SSL certificates.
+  - **Hands-On**
+    1. Click on your CLB and go to `Listeners`.
+    2. Add another listener entry here with the following configuration:
+       - *Load Balancer Protocol*: HTTPS
+       - *Load Balancer Port*: 443
+       - *Instance Protocol*: HTTP
+       - *Instance Port:* 80
+       - Select a *Cipher* (security cipher) for this entry.
+       - Select a *Certificate* (support only one certificate)
+       - Save the listener.
 - **Application Load Balancer (v2)**
-  - Supports mutliple listeners with multiple SSL certificates/
-
-
-
-
+  - Supports mutliple listeners with multiple SSL certificates.
+  - Uses SNI to make it work.
+  - **Hands-On**
+    1. Click on your load balancer and go to `Listeners`.
+    2. Add another listener entry here with the following configuration:
+       - *Protocol:Port*: HTTPS:443
+    3. Add a *Default Action* (e.g., forward to target group, etc)
+    4. Select a *Security Policy*.
+    5. Select a *Default SSL Certificate*  (support only one certificate)
+    6. We can repeat the steps 3 to 5 to add multiple certificates and corresponding default Actions.
+    7. Save the listener.
+- **Network Load Balancer (v2)**
+  - Supports mutliple listeners with multiple SSL certificates.
+  - **Hands-On**
+    1. Click on your load balancer and go to `Listeners`.
+    2. Add another listener entry here with the following configuration:
+       - *Protocol:Port*: TLS:443
+    3. Add a *Default Action* (e.g., forward to target group, etc)
+    4. Select a *Security Policy*.
+    5. Select a *Default SSL Certificate*  (support only one certificate)
+    6. We can repeat the steps 3 to 5 to add multiple certificates and corresponding default Actions.
+    7. Save the listener.
 
 ### Connection Draining
+
+>  Feature naming :
+>
+> - Connection Draining - for CLB
+> - Deregistration Delay - for ALB & NLB
+
+- Time to complete "in-flight requests" while the instance is de-registering or unhealthly.
+- Stops sending new requests to the EC2 instance which is de-registering.
+- Between 1 to 3600 seconds (default: 300 seconds)
+- Can be disabled (set value to 0)
+- Set to a low value if your requests are short
+
+
 
 ## CLB (v1)
 
