@@ -588,4 +588,56 @@ Types:
 > Note:
 >
 > *Use a ready-to-use AMI to reduce configuration time in order to be serving request fasters and reduce the cooldown period.*
+>
+> Scaling down action is triggered usually within 15 minutes.
+
+## Questions (important topics):
+
+1. ***ASG Default Termination Policy***:
+
+   - Find the AZ which has the most number of instances.
+   - If there are multiple instances in the AZ to choose from, delete the one with the oldest launch configuration.
+
+   > ASG tries to the balance the number of instances across AZ by default.
+
+2. ***Lifecycle hooks***:
+
+   - By default as soon as an instance is launched in an ASG it's in service.
+
+     ![](https://docs.aws.amazon.com/autoscaling/ec2/userguide/images/lifecycle_hooks.png)
+
+   - You have the ability to perform extra steps before the instance goes in service (pending state).
+   - You have the ability to perform some actions before the instance is terminated (terminating state).
+
+3. ***Launch template vs launch configuration***
+
+   - Both allow to change:
+     - ID of AMI, 
+     - Instance type, 
+     - Key pair,
+     - Security Groups,
+     - Tags,
+     - EC2 user data, etc.
+
+   | Launch Configuration           | Launch Template                                              |
+   | ------------------------------ | ------------------------------------------------------------ |
+   | Must be re-created every time. | Can have multiple versions.                                  |
+   |                                | Create parameters subsets (partial configuration for re-use and inheritance) |
+   |                                | Provision using both On-Demand and Spot instances (or a mix) |
+   |                                | Can use T2 unlimited burst feature.                          |
+   |                                | *Recommended by AWS going forward.*                          |
+
+   4. For compliance purposes, you would like to expose a fixed static IP address to your end-users so that they can write firewall rules that will be stable and approved by regulators. What type of Elastic Load Balancer would you choose? 
+      ***Network Load Balancer***
+
+   5. You have an Auto Scaling Group fronted by an Application Load Balancer. You have configured the ASG to use ALB Health Checks, then one EC2 instance has just been reported unhealthy. What will happen to the EC2 instance?
+      ***The ASG will terminate the EC2 instance***
+
+   6. A web application hosted on a fleet of EC2 instances managed by an Auto Scaling Group. You are exposing this application through an Application Load Balancer. Both the EC2 instances and the ALB are deployed on a VPC with the following CIDR `192.168.0.0/18`. How do you configure the EC2 instances' security group to ensure only the ALB can access them on port `80`?
+
+      ***Add an Inbound Rule with port `80` and ALB's Security Group as the source***
+
+      
+
+
 
