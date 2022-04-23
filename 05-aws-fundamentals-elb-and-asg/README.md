@@ -1,6 +1,40 @@
-Table of Contents
-
 # High Availability and Scalability: ELB & ASG
+
+## Table of Contents
+
+- [High Availability, Scalability and Load Balancing](#high-availability--scalability-and-load-balancing)
+- [ELB Overview](#elb-overview)
+  * [Health Checks](#health-checks)
+    + [Types of LBs](#types-of-lbs)
+    + [LB Security Groups](#lb-security-groups)
+  * [Sticky Sessions](#sticky-sessions)
+    + [Session Affinity](#session-affinity)
+    + [Cookie Names](#cookie-names)
+  * [Cross Zone Load Balancing](#cross-zone-load-balancing)
+    + [Cross Zone Load Balancing Feature Availability on Load Balancer](#cross-zone-load-balancing-feature-availability-on-load-balancer)
+  * [SSL Certificates](#ssl-certificates)
+    + [SSL - Server Name Indication](#ssl---server-name-indication)
+    + [ELB - SSL Certificates](#elb---ssl-certificates)
+  * [Connection Draining](#connection-draining)
+- [CLB (v1)](#clb--v1-)
+- [Application Load Balancer (v2)](#application-load-balancer--v2-)
+  * [Target Group Possiblities for ALB](#target-group-possiblities-for-alb)
+  * [Query strings/parameters routing](#query-strings-parameters-routing)
+- [Network Load Balancer (v2)](#network-load-balancer--v2-)
+  * [Target Group Possiblities for NLB](#target-group-possiblities-for-nlb)
+- [Gateway Load Balancer](#gateway-load-balancer)
+  * [Target Group Possiblities for NLB](#target-group-possiblities-for-nlb-1)
+  * [Auto Scaling Group Overview](#auto-scaling-group-overview)
+    + [Attributes](#attributes)
+    + [Auto scaling alarms](#auto-scaling-alarms)
+    + [Auto Scaling New Rules](#auto-scaling-new-rules)
+    + [Auto Scaling Custom Metric](#auto-scaling-custom-metric)
+  * [Scaling Policies](#scaling-policies)
+    + [Good metrics to scale on](#good-metrics-to-scale-on)
+    + [Scaling Cooldowns](#scaling-cooldowns)
+- [Questions (important topics):](#questions--important-topics--)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ## High Availability, Scalability and Load Balancing
 
