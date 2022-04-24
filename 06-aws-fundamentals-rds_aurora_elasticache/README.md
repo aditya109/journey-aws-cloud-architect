@@ -126,6 +126,34 @@ You have prod database that is taking on normal load, and want to run a reportin
 - Next, within *Storage*, choose:
   - Select a *Storage type*.
   - Provide *Allocated storage*.
+  - Provide *Enable storage autoscaling*.
+  - Maximum storage threshold.
+- Next, within *Availability & duration*, select for Multi-AZ deployment, it can either be:
+  - *Do not create a standby instance*.
+  - *Create a standby instance (recommended for production usage, creates a standby in a different AZ to provide data redundancy, eliminate I/O freezes, minimum latency spikes during system backups.)* 
+- Next, within *Connectivity*:
+  - Provide *VPC*.
+  - Provide *Subnet group*.
+  - Select whether or not you want to provide *Public access*.
+  - Provide *VPC security group*.
+  - Provide *AZ* (preference).
+- Next, within *Database authentication*, select Database authentication options:
+  - Password authentication (*Authenticates using database passwords*)
+  - Password and IAM Database authentication (*Authentication using database password and user credentials through AWS IAM roles*)
+  - Password and Kerberos authentication (*Choose a directory in which you want to allow authorized users to authenticate with this DB instance using Kerberos Authentication*)
+- Next, within *Additional configuration*:
+  - We have *Database options*, for providing:
+    - Initial database name
+    - DB parameter group
+    - Option group
+  - We have *Backup*:
+    - Select *Enable automatic backups*.
+    - Provide *Backup retention period.*
+    - Select *Backup window.*
+    - Enable *Cop tags to snapshots.*
+  - We have *Monitoring*:
+    - Select Enable Enhanced monitoring.
+    - 
   - 
 
 ### RDS Encryption + Security
