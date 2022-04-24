@@ -143,20 +143,91 @@ You have prod database that is taking on normal load, and want to run a reportin
   - Password and Kerberos authentication (*Choose a directory in which you want to allow authorized users to authenticate with this DB instance using Kerberos Authentication*)
 - Next, within *Additional configuration*:
   - We have *Database options*, for providing:
-    - Initial database name
-    - DB parameter group
-    - Option group
+    - *Initial database name*
+    - *DB parameter group*
+    - *Option group*
   - We have *Backup*:
     - Select *Enable automatic backups*.
     - Provide *Backup retention period.*
     - Select *Backup window.*
     - Enable *Cop tags to snapshots.*
   - We have *Monitoring*:
-    - Select Enable Enhanced monitoring.
-    - 
-  - 
+    - Select *Enable Enhanced monitoring*.
+    - Select *Granularity* period.
+    - Select *Monitoring Role*.
+  - For *Log exports*, select favored log types to publish to Amazon CloudWatch logs.
+    - Audit log
+    - Error log
+    - General log
+    - Slow query log
+  - For *Maintenance*,
+    - Select *enable auto minor version upgrade*.
+    - Select Maintenance window.
+  - For *Deletion protection*, select *enable deletion protection*.
+- Create RDS.
 
 ### RDS Encryption + Security
+
+- At rest encryption,
+
+  - Possibility to encrypt the master & read replicas with AWS KMS - AES-256 encryption.
+  - Encryption has to be defined at launch time.
+  - *If the master is not encrypted, the read replicas <u>cannot</u> be encrypted.*
+  - Transparent Data Encryption (TDE) available for Oracle and SQL Server.
+
+- In-flight encryption,
+
+  - SSL encryption to encrypt data to RDS in flight.
+
+  - Provide SSL options with trust certificate when connecting to database.
+
+  - To <u>enforce</u> SSL:
+
+    - PostgreSQL: `rds.force_ssl=1` in the AWS RDS Console (Parameter Groups)
+
+    - MySQL: Within the DB:
+      ```sql
+      GRANT USAGE ON *.* TO 'mysqluser'@'%' REQUIRE SSL;
+      ```
+
+#### RDS Encryption Operations
+
+- **Encrypting RDS backups**
+  - Snapshots of un-encrypted RDS databases are un-encrypted, and vice versa.
+  - We can copy a snapshot into an encrypted one.
+- **To encrypt an un-encrypted RDS database**
+  - Create a snapshot of the un-encrypted database.
+  - Copy the snaphot and enable encryption for the snapshot.
+  - Restore the database from the encrypted snapshot.
+  - Migrate applications to the new database, and delete the old database.
+
+#### RDS Security - Network & IAM
+
+Network security
+
+- RDS databases are usually deployed within a private subnet, not in a public one.
+- RDS security works by leveraging security groups (same as EC2 instances) - it controls which IP/security group can **communicate** with RDS.
+
+Access Management
+
+- IAM policies help control who can **manage** AWS RDS (through the RDS API)
+- Traditional username and password can be used to **login into** the database
+- IAM-based authentication can be used to log into RDS MySQL & PostgreSQL
+
+#### RDS - IAM Authentication
+
+- IAM database authentication works with **MySQL** and **PostgreSQL**
+- You don't need a password, just an authentication token obtained through IAM & RDS API calls.
+- Auth token has a lifetime of 15 minutes.
+
+
+
+
+
+- Benefits:
+  - Network in/out must be encrypted using SSL
+  - IAM to centrally manage users instead of DB
+  - Can leverage IAM Roles and EC2 instance profiles for easy integration.
 
 ## Amazon Aurora
 
