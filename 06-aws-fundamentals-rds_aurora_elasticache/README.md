@@ -171,7 +171,7 @@ You have prod database that is taking on normal load, and want to run a reportin
 - At rest encryption,
 
   - Possibility to encrypt the master & read replicas with AWS KMS - AES-256 encryption.
-  - Encryption has to be defined at launch time.
+  - <span style="color:orange">Encryption has to be defined at launch time.</span>
   - *If the master is not encrypted, the read replicas <u>cannot</u> be encrypted.*
   - Transparent Data Encryption (TDE) available for Oracle and SQL Server.
 
@@ -219,10 +219,7 @@ Access Management
 - IAM database authentication works with **MySQL** and **PostgreSQL**
 - You don't need a password, just an authentication token obtained through IAM & RDS API calls.
 - Auth token has a lifetime of 15 minutes.
-
-
-
-
+  ![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/06-aws-fundamentals-rds_aurora_elasticache/assets/rds-iam-authentication.svg)
 
 - Benefits:
   - Network in/out must be encrypted using SSL
@@ -230,6 +227,30 @@ Access Management
   - Can leverage IAM Roles and EC2 instance profiles for easy integration.
 
 ## Amazon Aurora
+
+- Aurora is a proprietary technology from AWS (not open sourced).
+- Postgres and MySQL are both supported as Aurora DB (that means your drivers will work as if Aurora was a Postgres or MySQL database)
+- Aurora is *AWS cloud optimized* and claims 5x performance improvement over MySQL on RDS, over 3x the performance of Postgres on RDS.
+- Aurora storage automatically grows in increments of 10GB, up to 128 GB.
+- Aurora can have 15 replicas while MySQL has 5, and the replication process is faster (sub 10 ms replica lag).
+- Failover in Aurora is instantaneous. It's natively highly available.
+- Aurora costs more than RDS (20% more) - but is more efficient.
+
+#### High availability and Read Scaling
+
+- It maintains 6 copies of your data across 3 AZ:
+  - 4 copies out of 6 needed for writes
+  - 3 copies out of 6 needed for reads
+  - Self healing with peer-to-peer replication
+  - Storage is striped across 100s of volumes.
+- One Aurora instance takes writes (master)
+- Automated failover for master in less than 30 seconds.
+- Master + up to 15 Aurora Read Replicas serve reads
+- Support for Cross Region Replication
+
+#### Aurora DB Cluster
+
+####  
 
 **Hands-On**
 
