@@ -250,9 +250,106 @@ Access Management
 
 #### Aurora DB Cluster
 
-####  
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/06-aws-fundamentals-rds_aurora_elasticache/assets/aurora-db-cluster.svg)
+
+#### Features of Aurora
+
+- Automatic fail-over
+- Backup and Recovery
+- Isolation and security
+- Industry compilance
+- Push-button scaling
+- Automated patching with zero downtime.
+- Advanced monitoring
+- Routine Maintenance
+- Backtrack: restore data at any point in time without using backups.
+
+#### Aurora Security
+
+- Similar to RDS because it uses the same engine.
+- Encryption at rest using KMS.
+- Automated backups, snapshots and replicas are also encrypted.
+- Encryption in flight using SSL (same process as MySQL or PostgreSQL).
+- **Possibility to authenticate using IAM token (same method as RDS)**.
+- You are responsible for protecting the instance using security groups.
+- <span style="color:red">You can't SSH.</span>
 
 **Hands-On**
+
+- Go to RDS > Create database.
+- Choose *database creation method* either:
+  - *Standard create* - provide detailed changes in configuration options.
+  - *Easy create* - use recommended best-practice configurations.
+- Next, choose *Configuration*:
+  - Choose *Engine options*:
+    - Postgres
+    - MySQL
+    - MariaDB
+    - Oracle
+    - Microsoft SQL Server
+    - Aurora (AWS Proprietary database) ✔️
+  - Select *Aurora Edition*.
+    - Amazon Aurora MySQL-compatible edition
+    - Amazon Aurora PostgreSQL-compatible edition
+  - Select *Capacity type*.
+    - Provisioned (user-provisioned and managed the server instance sizes)
+    - Serverless (user specifies the minimum and maximum amount of resources needed, and Aurora scales the capacity based on database load)
+  - Within *Replication features*, you can either select *single-master* or *multi-master* (when continuous writer availability is required).
+- Next, within *Templates*, choose your use case:
+  - Production
+  - Dev/Test
+  - Free Tier
+- Next, within *Settings*:
+  - Provide *DB instance identifier*
+  - Under *Credential settings*, 
+    - Give a master username.
+    - Give a master password.
+- Next, within *DB instance class*, choose:
+  - Standard classes (m classes)
+  - Memory optimized classes (r and x classes)
+  - Burstable classes (t classes)
+- Next, within *Storage*, choose:
+  - Select a *Storage type*.
+  - Provide *Allocated storage*.
+  - Provide *Enable storage autoscaling*.
+  - Maximum storage threshold.
+- Next, within *Availability & duration*, select for Multi-AZ deployment, it can either be:
+  - *Do not create a standby instance*.
+  - *Create a standby instance (recommended for production usage, creates a standby in a different AZ to provide data redundancy, eliminate I/O freezes, minimum latency spikes during system backups.)* 
+- Next, within *Connectivity*:
+  - Provide *VPC*.
+  - Provide *Subnet group*.
+  - Select whether or not you want to provide *Public access*.
+  - Provide *VPC security group*.
+  - Provide *AZ* (preference).
+- Next, within *Database authentication*, select Database authentication options:
+  - Password authentication (*Authenticates using database passwords*)
+  - Password and IAM Database authentication (*Authentication using database password and user credentials through AWS IAM roles*)
+  - Password and Kerberos authentication (*Choose a directory in which you want to allow authorized users to authenticate with this DB instance using Kerberos Authentication*)
+- Next, within *Additional configuration*:
+  - We have *Database options*, for providing:
+    - *Initial database name*
+    - *DB parameter group*
+    - *Option group*
+  - We have *Backup*:
+    - Select *Enable automatic backups*.
+    - Provide *Backup retention period.*
+    - Select *Backup window.*
+    - Enable *Cop tags to snapshots.*
+  - We have *Monitoring*:
+    - Select *Enable Enhanced monitoring*.
+    - Select *Granularity* period.
+    - Select *Monitoring Role*.
+  - For *Log exports*, select favored log types to publish to Amazon CloudWatch logs.
+    - Audit log
+    - Error log
+    - General log
+    - Slow query log
+  - For *Maintenance*,
+    - Select *enable auto minor version upgrade*.
+    - Select Maintenance window.
+  - For *Deletion protection*, select *enable deletion protection*.
+- Create RDS.
 
 ### Advanced Concepts
 
