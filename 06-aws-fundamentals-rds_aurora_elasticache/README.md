@@ -375,7 +375,9 @@ Once created,
 
 #### Aurora Replicas - Autoscaling
 
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/06-aws-fundamentals-rds_aurora_elasticache/assets/aurora-rds-autoscaling.svg)
 
+#### Aurora - Custom Endpoints
 
 
 
