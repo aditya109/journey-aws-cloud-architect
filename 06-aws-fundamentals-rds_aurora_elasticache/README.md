@@ -442,6 +442,25 @@ Once created,
 
 ##### User Session Store
 
+- User logs into any of the application
+- The application writes the session data into ElastiCache
+- The user hits another instance of our application
+- The instance retrieves the data and the user automatically gets logged in.
+
+![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/06-aws-fundamentals-rds_aurora_elasticache/assets/elasticcache-architecture-user-session-store.svg)
+
+#### ElasticCache - Redis vs Memcached
+
+| Redis                                                        | Memcached                                          |
+| ------------------------------------------------------------ | -------------------------------------------------- |
+| **Multi AZ** with auto failover                              | Multi-node for partitioning of data (**sharding**) |
+| **Read replicas** to scale reads and have **high availability** | **No high availability** (replication)             |
+| Data durability using AOF persistence                        | **Non persistence**                                |
+| **Backup and restore features**                              | **No backup and restore**                          |
+|                                                              | Multi-threaded architecture                        |
+
+
+
 
 
 **Hands-On**
