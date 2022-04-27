@@ -379,9 +379,18 @@ Once created,
 
 #### Aurora - Custom Endpoints
 
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/06-aws-fundamentals-rds_aurora_elasticache/assets/aurora-custom-endpoints.svg)
 
+- Define a subset of Aurora instances as a custom endpoint.
+- Example use case, run analytical queries on specific replicas.
+- The reader endpoint is generally not used after defining custom endpoints.
 
+#### Aurora Serverless
 
+- Automated database instantiation and auto-scaling based on actual usage.
+- Good for infrequent, intermittent or unpredictable workloads
+- No capacity planning needed.
+- Pay per second, can be more cost-effective.
 
 
 
