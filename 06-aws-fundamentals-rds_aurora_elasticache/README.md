@@ -392,6 +392,15 @@ Once created,
 - No capacity planning needed.
 - Pay per second, can be more cost-effective.
 
+![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/06-aws-fundamentals-rds_aurora_elasticache/assets/aurora-serverless.svg)
+
+#### Aurora - Multi master
+
+- In case you want immediate failover for write node (HA)
+- Every node does R/W - vs promoting a RR as the new master
+
+
+
 
 
 
