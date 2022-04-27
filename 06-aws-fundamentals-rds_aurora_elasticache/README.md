@@ -399,24 +399,45 @@ Once created,
 - In case you want immediate failover for write node (HA)
 - Every node does R/W - vs promoting a RR as the new master
 
+![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/06-aws-fundamentals-rds_aurora_elasticache/assets/aurora-multi-master.svg)
+
+#### Global Aurora 
+
+- Aurora cross region read replicas:
+  - useful for disaster recovery
+  - simple to put in place
+- Aurora global database (recommended):
+  - 1 primary region (read/write)
+  - up to 5 secondary (read-only) regions, replication lag < 1 second
+  - up to 16  read replicas per secondary region
+  - helps for decreasing latency
+  - promoting another region (for disaster recovery) has an RTO < 1 minute
+
+#### Aurora ML
+
+- Enables you to add ML-based predictions to your applications via SQL
+- Simple, optimized and secure integration between Aurora and AWS ML services.
+- Supported services
+  - Amazon SageMaker (use with any ML model)
+  - Amazon Comprehend (for sentiment analysis)
+- You don't need to have ML experience
+- Use case: 
+  - fraud detection
+  - ads targeting
+  - sentiment analysis
+  - product recommendations
+
+## ElastiCache 
+
+- ElastiCache is to get managed Redis or Memcached
+- AWS takes care of OS maintenance/patching, optimizations, setup, configuration, monitoring, failure recovery and backups.
+
+> Note: <span style="color:red">**using ElasticCache involves heavy application code changes**</span>
+
+#### Architecture
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## ElastiCache Hands-On
+**Hands-On**
 
 ## Questions
