@@ -434,7 +434,13 @@ Once created,
 
 > Note: <span style="color:red">**using ElasticCache involves heavy application code changes**</span>
 
-#### Architecture
+#### Architecture 
+
+##### DB Cache
+
+![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/06-aws-fundamentals-rds_aurora_elasticache/assets/elasticcache-architecture-db-cache.svg)
+
+##### User Session Store
 
 
 
