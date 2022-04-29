@@ -459,10 +459,83 @@ Once created,
 | **Backup and restore features**                              | **No backup and restore**                          |
 |                                                              | Multi-threaded architecture                        |
 
-
-
-
-
 **Hands-On**
 
+1. Go to ElastiCache > Create your Amazon ElastiCache cluster.
+2. Select a Cluster Engine
+   - Redis
+     - You can also select *Cluster mode enabled*.
+   - Memcached
+3. Within *Redis settings*, provide *Name*, *Description*, *Engine version compatibility*, *Port*, *Parameter group*, *Node type*, *Number of replicas*.
+4. Within *Advanced Redis settings*, 
+   1. You have *Multi-AZ with Auto-Failover* selection (#replicas > 0).
+   2. You can now provide *Subnet group* details - *Name*, *Description*, *VPC ID*, *Subnets*.
+   3. Provide *Preferred AZ* (if any).
+5. Within *Security*, provide :
+   - *Security groups*
+   - *Encryption at-rest*
+   - *Encryption Key*
+     - Default
+     - Customer Managed Customer Master Key
+   - *Encryption in-transit*
+6. Provide *Import data to cluster*, provide *Seed RDB file S3 location*.
+7. Provide *Backup* details
+   - Select *Enable automatic backups*.
+   - Provide *Backup retention period*.
+   - Provide *Backup window*.
+8. Provide *Maintenance* details
+   - Select *Maintenance* window
+   - Select *Topic for SNS notification* [Amazon Simple Notification Service (SNS) ](https://aws.amazon.com/sns/)
+9. Create ElastiCache.
+
+### Cache Security
+
+- All cache in ElastiCache:
+  - <span style="color:orange">Do not support IAM Authentication</span>.
+  - IAM policies on ElastiCache are only used for AWS API-level security.
+- Redis AUTH
+  - You can set a *password/token* when you create a Redis Cluster. (*This is an extra level of security for your cache on top of security groups*)
+  - Support SSL in flight encryption
+- Memcached
+  - Supports SASL-based authentication (advanced)
+
+### Patterns for ElastiCache
+
+- **Lazy loading**: all the read data is cached, data can become stale in cache
+  *Illustration Of Lazy Loading*
+
+  ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/06-aws-fundamentals-rds_aurora_elasticache/assets/elasticcache-architecture-db-cache.svg)
+
+- **Write loading**: Adds or update data in the cache when written to a DB (no stale data)
+
+- **Session store**: store temporary session data in a cache (using TTL features)
+
+> "There are only 2 hard things in Computer Science: cache invalidation and naming things."
+
+### ElastiCache - Redis Use Case
+
+- Gaming Leaderboards are computationally complex.
+- *Redis sorted sets* guarantee both uniqueness and element ordering
+- Each time a new element is added, it's ranked in real time, then added in correct order.
+
 ## Questions
+
+| We have an RDS database that struggles to keep up with the demand of requests from our website. Our million users mostly read news, and we don't post news very often. Which solution is **NOT** adapted to this problem? |
+| ------------------------------------------------------------ |
+| *RDS Multi AZ*                                               |
+| **You would like to ensure you have a replica of your database available in another AWS Region if a disaster happens to your main AWS Region. Which database do you recommend to implement this easily?** |
+| *Aurora Global Database*                                     |
+| **Your company has a production Node.js application that is using RDS MySQL 5.6 as its database. A new application programmed in Java will perform some heavy analytics workload to create a dashboard on a regular hourly basis. What is the most cost-effective solution you can implement to minimize disruption for the main application?** |
+| *Create a Read Replicas in a different AZ and run the analytics workload on the replica database* |
+| ********You would like to create a disaster recovery strategy for your RDS PostgreSQL database so that in case of a regional outage the database can be quickly made available for both read and write workloads in another AWS Region. The DR database must be highly available. What do you recommend?** |
+| *Create a Read Replica in a different region and enable Multi-AZ on the Read Replica*<br /><span style="font-size:10px">*[Promoting a Read Replica](https://aws.amazon.com/blogs/database/implementing-a-disaster-recovery-strategy-with-amazon-rds/)<br/>Unlike an Amazon RDS Multi-AZ configuration, failover to a Read Replica is not an automated process. If you are using cross-Region Read Replicas, you should be certain that you want to switch your AWS resources between Regions. Cross-Region traffic can experience latency, and reconfiguring applications can be complicated.<br/>For instructions, see Promoting a Read Replica in the Amazon RDS User Guide.<br/>After you promote a cross-Region Read Replica to be a standalone instance, if you want to later switch back to the original Region, you must create a new Read Replica. Unlike an Amazon RDS Multi-AZ configuration, this is not done for you automatically.<br/>==============================<br/>That means the question is not asking for automatic failover. And automatic failover impossible for cross region in today AWS technology.*</span> |
+|                                                              |
+|                                                              |
+|                                                              |
+|                                                              |
+|                                                              |
+|                                                              |
+|                                                              |
+|                                                              |
+|                                                              |
+
