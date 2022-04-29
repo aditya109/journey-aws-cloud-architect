@@ -529,12 +529,12 @@ Once created,
 | *Create a Read Replicas in a different AZ and run the analytics workload on the replica database* |
 | ********You would like to create a disaster recovery strategy for your RDS PostgreSQL database so that in case of a regional outage the database can be quickly made available for both read and write workloads in another AWS Region. The DR database must be highly available. What do you recommend?** |
 | *Create a Read Replica in a different region and enable Multi-AZ on the Read Replica*<br /><span style="font-size:10px">*[Promoting a Read Replica](https://aws.amazon.com/blogs/database/implementing-a-disaster-recovery-strategy-with-amazon-rds/)<br/>Unlike an Amazon RDS Multi-AZ configuration, failover to a Read Replica is not an automated process. If you are using cross-Region Read Replicas, you should be certain that you want to switch your AWS resources between Regions. Cross-Region traffic can experience latency, and reconfiguring applications can be complicated.<br/>For instructions, see Promoting a Read Replica in the Amazon RDS User Guide.<br/>After you promote a cross-Region Read Replica to be a standalone instance, if you want to later switch back to the original Region, you must create a new Read Replica. Unlike an Amazon RDS Multi-AZ configuration, this is not done for you automatically.<br/>==============================<br/>That means the question is not asking for automatic failover. And automatic failover impossible for cross region in today AWS technology.*</span> |
-|                                                              |
-|                                                              |
-|                                                              |
-|                                                              |
-|                                                              |
-|                                                              |
+| **Which of the following statement is true regarding replication in both RDS Read Replicas and Multi-AZ?** |
+| Read Replica uses Asynchronous Replication and Multi-AZ uses Synchronous Replication |
+| **Which RDS database technology does NOT support IAM Database Authentication?** |
+| *Oracle*                                                     |
+| **You have an un-encrypted RDS DB instance and you want to create Read Replicas. Can you configure the RDS Read Replicas to be encrypted?** |
+| No                                                           |
 |                                                              |
 |                                                              |
 |                                                              |
