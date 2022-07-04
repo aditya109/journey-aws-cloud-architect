@@ -36,6 +36,8 @@ http://api.www.example.com.
 6. Lastly, `http` is your protocol.
 7. Combining domain name and protocol, we get FQDN or *Fully Qualified Domain Name*.
 
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/07-route-53/assets/dns.svg)
+
 ## Overview
 
 ### Registering a Domain
