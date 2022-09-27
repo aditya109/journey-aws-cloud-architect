@@ -82,45 +82,15 @@ Route 53 is also a Domain Registrar.
     Example, <span style="color:blue">application1.company.internal</span>
 - You pay $0.5 per month per hosted zone.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### Registering a Domain
 
 ### Creating first records
 
-
-
 ### EC2 setup
 
-### TTL
+### Records TTL (Time to Live)
+
+
 
 ### CNAME vs Alias
 
