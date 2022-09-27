@@ -90,13 +90,80 @@ Route 53 is also a Domain Registrar.
 
 ### Records TTL (Time to Live)
 
+![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/07-route-53/assets/records-ttl.svg)
 
+- If we have high TTL, e.g., 24 hours
+  - Less traffic on Route 53
+  - Possibly outdated records
+- If we have low TTL, e.g., 60 secs
+  - More traffic on Route 53 (expensive)
+  - Records are outdated for less time
+  - Easy to change records.
+
+> <span style="color:orangered">Except for Alias records, TTL is mandatory for each DNS record.</span>
 
 ### CNAME vs Alias
 
+- AWS resources (Load Balancer, CloudFront, etc) expose an AWS hostname.
+
+- CNAME:
+
+  - Points a hostname to any other hostname. (app.mydomain.com => blabla.anything.com)
+
+  > <span style="color:orangered">**ONLY FOR NON-ROOT DOMAIN (aka something.mydomain.com)**</span>
+
+- Alias:
+
+  - Points a hostname to an AWS Resource. (app.mydomain.com => blabla.amazon.com)
+  - Free of charge
+  - Native health check capability within itself.
+  - Is an extension to DNS functionality, automatically recognizes changes in the resource's IP addresses.
+  - Unlike CNAME, it can be used for the top node of a DNS namespace (Zone Apex) e.g., example.com
+  - Alias Record is always of type A/AAAA for AWS resources (IPv4/IPv6) 
+  - Effective targets for Alias records
+    - ELBs
+    - CloudFront Distributions
+    - API Gateway
+    - Elastic Beanstalk environments
+    - S3 Websites
+    - VPC Interface Endpoints
+    - Global Accelerator 
+    - Route 53 record in the same hosted zone
+
+  > - <span style="color:orangered">**Cannot set an Alias records from an EC2 DNS name**</span>
+  > - <span style="color:orangered">**Cannot set TTL**</span>
+  > - <span style="color:orangered">**Works for both ROOT and NON-ROOT DOMAIN (aka  mydomain.com)**</span>
+
 ### Routing Policies
 
+This defines how Route 53 responds to DNS queries.
+
+> NOT SAME AS `ROUTING`.
+>
+> It is not same as LB routing which routes the traffic. 
+> DNS does not route any traffic it only responds to the DNS queries.
+
+Route 53 supports the following routing policies:
+
+1. Simple
+2. Weighted
+3. Failover
+4. Latency based
+5. Geolocation
+6. Multi-value answer
+7. Geoproximity 
+
 #### Simple
+
+- Typically routes traffic to a single resource.
+- Can specify multiple values in the same record
+
+> <span style="color:crimson">If multiple values are returned, a random one is chosen by the client.</span>
+
+- When Alias is enabled, specify only one AWS resource.
+- Can't be associated with Health checks.
+
+ 
 
 #### Weighted
 
