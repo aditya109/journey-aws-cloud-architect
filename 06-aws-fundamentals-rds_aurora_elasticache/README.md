@@ -2,40 +2,7 @@
 
 ## Table of Contents
 
-- [RDS Overview](#rds-overview)
-  * [RDS Read Replicas vs Multi AZ](#rds-read-replicas-vs-multi-az)
-    + [RDS Read Replicas for read scalability](#rds-read-replicas-for-read-scalability)
-      - [Use-case](#use-case)
-    + [RDS Read Replicas - Network Cost](#rds-read-replicas---network-cost)
-    + [RDS Multi AZ (Disaster Recovery)](#rds-multi-az--disaster-recovery-)
-    + [RDS - From Single-AZ to Multi-AZ](#rds---from-single-az-to-multi-az)
-  * [RDS Encryption + Security](#rds-encryption---security)
-    + [RDS Encryption Operations](#rds-encryption-operations)
-    + [RDS Security - Network & IAM](#rds-security---network---iam)
-    + [RDS - IAM Authentication](#rds---iam-authentication)
-- [Amazon Aurora](#amazon-aurora)
-    + [High availability and Read Scaling](#high-availability-and-read-scaling)
-    + [Aurora DB Cluster](#aurora-db-cluster)
-    + [Features of Aurora](#features-of-aurora)
-    + [Aurora Security](#aurora-security)
-  * [Advanced Concepts](#advanced-concepts)
-    + [Aurora Replicas - Autoscaling](#aurora-replicas---autoscaling)
-    + [Aurora - Custom Endpoints](#aurora---custom-endpoints)
-    + [Aurora Serverless](#aurora-serverless)
-    + [Aurora - Multi master](#aurora---multi-master)
-    + [Global Aurora](#global-aurora)
-    + [Aurora ML](#aurora-ml)
-- [ElastiCache](#elasticache)
-    + [Architecture](#architecture)
-      - [DB Cache](#db-cache)
-      - [User Session Store](#user-session-store)
-    + [ElasticCache - Redis vs Memcached](#elasticcache---redis-vs-memcached)
-  * [Cache Security](#cache-security)
-  * [Patterns for ElastiCache](#patterns-for-elasticache)
-  * [ElastiCache - Redis Use Case](#elasticache---redis-use-case)
-- [Questions](#questions)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ## RDS Overview
 
@@ -261,6 +228,19 @@ Access Management
   - IAM to centrally manage users instead of DB
   - Can leverage IAM Roles and EC2 instance profiles for easy integration.
 
+## RDS Custom for Oracle and Microsoft SQL Server
+
+Since we cannot interfere with underlying OS and database configuration in RDS, we have an alternative called RDS Custom. 
+It is for two database types: ***Managed Oracle*** ***Microsoft SQL Server Database*** with OS and database customization.
+In RDS, automates setup, operation and scaling of database in AWS, whereas in RDS Custom we can access to the underlying database and OS so we can:
+
+- configure settings
+- install patches
+- enable native features
+- access the underlying EC2 instance using **SSH** or **SSM Session Manager**.
+
+> <span style="color:orange">Before performing any customization, it is better to deactivate automation mode and take a DB snapshot.</span>
+
 ## Amazon Aurora
 
 - Aurora is a proprietary technology from AWS (not open sourced).
@@ -461,6 +441,73 @@ Once created,
   - ads targeting
   - sentiment analysis
   - product recommendations
+
+### Backup and Monitoring
+
+#### RDS Backups
+
+- Automated backups:	
+  - Daily full backup of the database (during the maintenance window).
+  - Transaction logs are backed-up by RDS every 5 minutes.
+    - Gives the ability to restore to any point in time (from oldest backup to 5 minutes ago)
+  - 1 to 35 days of retention, set to 0 to disable automated backups.
+- Manual DB Snapshots
+  - Manually triggered by the user.
+  - Retention of backup for as long as required.
+
+> <span style="color:crimson">Trick: In a stopped RDS database, you will pay for storage. If you plan on stopping it for a long time, you should snapshot and restore instead. This will help in cost savings.</span>
+
+#### Aurora Backups
+
+- Automated backups:	
+  - 1 to 35 days of retention, cannot be disabled.
+  - point-in-time recovery in that timeframe.
+- Manual DB Snapshots
+  - Manually triggered by the user.
+  - Retention of backup for as long as required.
+
+#### RDS & Aurora Restore options
+
+- Restoring a RDS/Aurora backup or a snapshot creates a new database.
+- Restoring MySQL RDS database from S3.
+  - Create a backup of your on-premises database.
+  - Store it on Amazon S3 (object storage).
+  - Restore the backup file onto a new RDS instance running MySQL.
+- Restoring MySQL Aurora cluster from S3.
+  - Cerate a backup of your on-premises database using Percona XtraBackup.
+  - Store the backup file on Amazon S3.
+  - Restore the backup file onto a new Aurora cluster running MySQL.
+
+#### Aurora Database Cloning
+
+- Create a new Aurora DB Cluster from an existing one.
+- Faster than snapshot and restore.
+- The new DB cluster uses the same cluster volume and data as the original but will change when data updates are made.
+- Very fast and cost-effective.
+
+> <span style="color:limegreen">Useful to create a *staging* database from a *production* database without impacting the production database.</span>?
+
+### Amazon RDS Proxy
+
+- Fully managed database proxy for RDS.
+- Allows apps to pool and shared DB connections established with the database.
+  *Improves database efficiency by reducing the stress database resources (e.g., CPU and RAM) and minimize open connections (and timeouts)*
+
+- Serverless, autoscaling, highly available (multi-AZ)
+  *Reduces RDS & Aurora failover time by upto 66%*
+- Supports RDS and Aurora.
+- No code changes required for most apps.
+  *Enforce IAM Authentication for DB, and securely store credentials in AWS secrets manager.*
+
+> <span style="color:crimson">RDS Proxy is never publicly accessible (must be accessed from VPC).</span>
+
+
+
+
+
+
+
+
 
 ## ElastiCache 
 

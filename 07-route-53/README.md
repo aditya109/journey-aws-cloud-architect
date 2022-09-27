@@ -42,6 +42,8 @@ http://api.www.example.com.
 
 ### Creating first records
 
+
+
 ### EC2 setup
 
 ### TTL
