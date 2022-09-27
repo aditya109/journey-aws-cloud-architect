@@ -155,6 +155,8 @@ Route 53 supports the following routing policies:
 
 #### Simple
 
+![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/07-route-53/assets/simple-routing-policy.svg)
+
 - Typically routes traffic to a single resource.
 - Can specify multiple values in the same record
 
