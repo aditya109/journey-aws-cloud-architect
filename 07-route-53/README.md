@@ -165,17 +165,74 @@ Route 53 supports the following routing policies:
 - When Alias is enabled, specify only one AWS resource.
 - Can't be associated with Health checks.
 
- 
-
 #### Weighted
+
+- Control the percentage of the requests that go to each specific resource.
+
+- Assign each record a relative weight:
+
+  - traffic (%) = Weight from a specific record / Sum of all the weights for all records
+
+  > *Weights don't need to sum up to 100, rather 256.* Each can be between 0 and 255 
+
+- DNS records must have the same name and type.
+
+- Can be associated with Health Checks.
+
+- Use cases: load balancing between regions, testing new application versions...
+
+- Assign a weight of 0 to a record to stop sending traffic to a resource.
+
+- If all records have weight of 0, then all records will be returned equally.
 
 #### Latency
 
+- Redirect to the resource that has the least latency close to us.
+- Super helpful when latency for the users is a priority.
+- Latency is based on traffic between users and AWS Regions.
+  For example, Germany users may be directed to the US.
+- Can be associated with Health Checks (has a failover capability)
+
 #### Health Checks
 
-**Hands On**
+- HTTP Health Checks are only for **public resources**.
 
-#### Failover
+- Health Check => Automated DNS Failover.
+
+  - Health checks that monitor an endpoint (application, server or other AWS resources)
+
+    - About 15 global health checkers will check the endpoint health.
+
+      - Healthy/unhealthy threshold - 3 (default)
+      - Interval - 30 sec (can be set to 10 sec - higher cost)
+      - Supported protocol - HTTP, HTTPS and TCP
+      - If count of health checkers greater than 18% report the endpoint is healthy, Route 53 considers it healthy, else unhealthy.
+      - Ability to choose which location you want Route 53 to use.
+
+      > <span style='color:orangered'>Required configuration on router/firewall to allow incoming from Route 53 Health Checks (within application instance).</span>
+
+    - Health checks pass only when the endpoint responds with the `2xx` and `3xx` status codes.
+
+    - Health checks can be setup to pass/fail based on the text in the first **5120 bytes** of the response.
+
+  - Health checks that monitor other health check (calculated health checks)
+
+    - Combine the results of multiple health checks into a single health check using using OR, AND or ATLEAST.
+    - Can monitor upto 256 child health checks.
+    - Specify how many of the health checks need to pass to make the parent pass.
+    - Usage: Perform maintenance to your website without causing all the health checks to fail.
+
+- Health checks that monitor CloudWatch Alarms (full control !!) - e.g., throttles of DynamoDB, alarms on RDS, custom metrics (helpful for private resources.)
+
+  - Route 53 health checkers are outside the VPC, meaning they can't access **private** endpoints (private VPC or on-premise resource)
+
+  - We can create a **CloudWatch Metric** and associate a **CloudWatch Alarm**, then create a Health Check that checks the alarm itself.
+
+- Health checks are integrated with CW metrics.
+
+#### Failover (Active-Passive)
+
+
 
 #### Geolocation
 
