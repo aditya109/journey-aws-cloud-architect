@@ -232,17 +232,54 @@ Route 53 supports the following routing policies:
 
 #### Failover (Active-Passive)
 
-
+![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/07-route-53/assets/failover-routing-policy.svg)
 
 #### Geolocation
 
+- Different from latency-based. This is based on user location.
+- Specify location by continent, country or by US State (if there's overlapping most precise location is selected.)
+- Should create a `Default` record (in case of no-match)
+- Can be associated with health checks
+- Usecase: website localization, restrict, content distribution, load balancing, etc.
+
 #### Traffic Flow and Geoproximity
 
-**Hands-On**
+- Route traffic to your resources based on the geographic location of users and resources.
+
+- Ability to ***shift more traffic to resources*** based on the defined ***bias***.
+
+- To change the size of the geographic region, specify bias values:
+
+  - To expand (1 to 99) - more traffic to the resource
+  - To shrink (-1 to -99) - less traffic to the resource
+
+- Resources can be :
+
+  - AWS resources (specify AWS region)
+
+    > <span style='color:orangered'>Route 53 Traffic Flow is required for using this feature.</span> 
 
 #### Multi-value
 
+- Use when routing traffic to multiple resources
+
+- Route 53 return multiple values/resources
+
+- Can be associated with Health checks (return only values from healthy resources)
+
+- Upto to 8 healthy records are returned from each Multi-Value query.
+
+  > **<span style='color:orangered'>Multi-value is not a substitute from having an ELB.</span>**
+  >
+  > This is different from simple multiple value record, as the later does not allow health checks.
+
 ## 3rd Party Domains & Route 53
 
+### Domain Registrar vs DNS Service
 
+- You can buy or register your domain name with a Domain Registrar typically by paying annual charges. (e.g., GoDaddy, Amazon Registrar, etc.)
+- The Domain Registrar usually provides you with a DNS service to manage your DNS records.
+- But you can use another DNS service to manage your DNS records.
+- Example: purchase the domain from GoDaddy and use Route 53 to manage your DNS records.
+- You create the Nameserver on AWS and linked it to your domain.
 
