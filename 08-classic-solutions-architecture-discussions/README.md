@@ -16,5 +16,5 @@
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/scaling-horizontally-2-whattimeisitdotcom.svg)
 
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/scaling-horizontally-3-whattimeisitdotcom.svg)
+![]()
 
-![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/scaling-horizontally-4-whattimeisitdotcom.svg)
