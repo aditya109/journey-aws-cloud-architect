@@ -7,3 +7,4 @@
 - We want to start small and can accept downtime.
 - We want to fully scale vertically and horizontally, no downtime.
 
+![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/simple-solution-whattimeisitdotcom.svg)
