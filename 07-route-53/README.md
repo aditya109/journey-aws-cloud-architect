@@ -2,7 +2,30 @@
 
 Table of Contents
 
+- [What is DNS ?](#what-is-dns--)
+- [Overview- Route 53](#overview--route-53)
+  * [Route 53 - Records](#route-53---records)
+    + [Record Types:](#record-types-)
+    + [Hosted Zones](#hosted-zones)
+  * [Registering a Domain](#registering-a-domain)
+  * [Creating first records](#creating-first-records)
+  * [EC2 setup](#ec2-setup)
+  * [Records TTL (Time to Live)](#records-ttl--time-to-live-)
+  * [CNAME vs Alias](#cname-vs-alias)
+  * [Routing Policies](#routing-policies)
+    + [Simple](#simple)
+    + [Weighted](#weighted)
+    + [Latency](#latency)
+    + [Health Checks](#health-checks)
+    + [Failover (Active-Passive)](#failover--active-passive-)
+    + [Geolocation](#geolocation)
+    + [Traffic Flow and Geoproximity](#traffic-flow-and-geoproximity)
+    + [Multi-value](#multi-value)
+- [3rd Party Domains & Route 53](#3rd-party-domains---route-53)
+  * [Domain Registrar vs DNS Service](#domain-registrar-vs-dns-service)
+- [Questions](#questions)
 
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ## What is DNS ?
 
