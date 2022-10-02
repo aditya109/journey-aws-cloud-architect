@@ -18,15 +18,10 @@ Table of contents
 - We want to fully scale vertically and horizontally, no downtime.
 
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/simple-solution-whattimeisitdotcom.svg)
-
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/scaling-vertically-whattimeisitdotcom.svg)
-
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/scaling-horizontally-whattimeisitdotcom.svg)
-
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/scaling-horizontally-2-whattimeisitdotcom.svg)
-
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/scaling-horizontally-3-whattimeisitdotcom.svg)
-
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/scaling-horizontally-asg-whattimeisitdotcom.svg)
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/scaling-horizontally-disaster-resilience-whattimeisitdotcom.svg)
 
@@ -43,6 +38,6 @@ Table of contents
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/session-affinity-myclothesdotcom.svg)
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/client-side-user-cookies-plain-myclothesdotcom.svg)
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/user-cookies-plain-myclothesdotcom.svg)
-
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/server-sessions-myclothesdotcom.svg)
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/persistent-storage-myclothesdotcom.svg)
+![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/master-replica-read-scaling-myclothesdotcom.svg)
