@@ -39,3 +39,4 @@ Table of contents
 - Users should not lose their shopping cart.
 - Users should have their details (address, etc.) in a database.
 
+![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/simple-solution-myclothesdotcom.svg)
