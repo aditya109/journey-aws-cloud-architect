@@ -42,4 +42,4 @@ Table of contents
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/persistent-storage-myclothesdotcom.svg)
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/persistent-storage-scaling-reads-with-replication-myclothesdotcom.svg)
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/persistent-storage-scaling-reads-with-write-thorough-cache-myclothesdotcom.svg)
-![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/security-and-disaster-recovery-myclothesdotcom.svg)
+![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/08-classic-solutions-architecture-discussions/assets/security-and-disaster-recovery-myclothesdotcom.svg)
