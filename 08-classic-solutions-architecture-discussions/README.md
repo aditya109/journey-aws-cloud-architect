@@ -45,3 +45,4 @@ Table of contents
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/user-cookies-plain-myclothesdotcom.svg)
 
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/server-sessions-myclothesdotcom.svg)
+![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/persistent-storage-myclothesdotcom.svg)
