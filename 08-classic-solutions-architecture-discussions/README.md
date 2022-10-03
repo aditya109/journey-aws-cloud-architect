@@ -43,3 +43,13 @@ Table of contents
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/persistent-storage-scaling-reads-with-replication-myclothesdotcom.svg)
 ![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/persistent-storage-scaling-reads-with-write-thorough-cache-myclothesdotcom.svg)
 ![](https://raw.githubusercontent.com/aditya109/journey-aws-cloud-architect/main/08-classic-solutions-architecture-discussions/assets/security-and-disaster-recovery-myclothesdotcom.svg)
+
+## MyWordPress.com: Stateful Web App
+
+- We are trying to create a fully scalable WordPress website.
+- We want that website to access and correctly display picture uploads.
+- Our user data and the blog content should be stored in a MySQL database.
+
+![]()
+![]()
+![]()
