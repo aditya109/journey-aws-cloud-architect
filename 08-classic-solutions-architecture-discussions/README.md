@@ -50,6 +50,6 @@ Table of contents
 - We want that website to access and correctly display picture uploads.
 - Our user data and the blog content should be stored in a MySQL database.
 
-![]()
-![]()
-![]()
+![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/simple-solution-mywordpressdotcom.svg)
+![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/image-storage-mywordpressdotcom.svg)
+![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/image-storage-efs-mywordpressdotcom.svg)
