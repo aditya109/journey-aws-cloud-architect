@@ -83,7 +83,7 @@ Common developer problems on AWS:
 - Configuring all the databases, load balancers, etc.
 - Scaling concerns
 
-Elastic Beanstalk is a developer centric view of deploying an application on AWS. 
+Elastic Beanstalk is a developer centric view of deploying an application on AWS.
 It uses all the components which we have previously seen like EC2, ASG, ELB, RDS,..., but is a managed service:
 
 - Automatically handles capacity provisioning, load balancing, scaling, application health monitoring, instance configuration, ...
@@ -111,3 +111,5 @@ Steps to follow:
 
 #### Web server tier vs worker tier
 
+![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/web-server-tier-elastic-beanstalk.svg)
+![](https://github.com/aditya109/journey-aws-cloud-architect/raw/main/08-classic-solutions-architecture-discussions/assets/web-server-tier-elastic-beanstalk.svg)
