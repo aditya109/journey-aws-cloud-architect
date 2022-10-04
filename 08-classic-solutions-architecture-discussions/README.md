@@ -2,6 +2,19 @@
 
 Table of contents
 
+- [Pillars for a well architected application](#pillars-for-a-well-architected-application)
+- [Stateless Web App: WhatIsTheTime.com](#stateless-web-app--whatisthetimecom)
+- [Stateful Web App: MyClothes.com](#stateful-web-app--myclothescom)
+- [MyWordPress.com: Stateful Web App](#mywordpresscom--stateful-web-app)
+- [Instantiating Applications quickly](#instantiating-applications-quickly)
+- [Elastic Beanstalk](#elastic-beanstalk)
+  * [Components](#components)
+    + [Web server tier vs worker tier](#web-server-tier-vs-worker-tier)
+- [Q&A](#q-a)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 ## Pillars for a well architected application
 
 - Costs
