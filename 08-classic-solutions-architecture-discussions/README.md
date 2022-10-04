@@ -118,3 +118,12 @@ For worker environment,
 
 - Scale based on the number of SQS messages
 - Can push messages to SQS queue from another Web Server Tier
+
+> Beanstalkd behind the scene leverages CloudFormation to bring up the infrastructure.
+
+## Q&A
+
+| Your website **TriangleSunglasses.com** is hosted on a fleet of EC2 instances managed by an Auto Scaling Group and fronted by an Application Load Balancer. Your ASG has been configured to scale on-demand based on the traffic going to your website. To reduce costs, you have configured the ASG to scale based on the traffic going through the ALB. To make the solution highly available, you have updated your ASG and set the minimum capacity to 2. How can you further reduce the costs while respecting the requirements? |
+| ------------------------------------------------------------ |
+| Ans. Reserve two EC2 instances                               |
+
