@@ -258,4 +258,6 @@ You can enable Delete Marker while deleting an S3 bucket to restore it later.
   - Varies depending on storage class.
   - Example: S3 standard has 99.99 % availability = not available 53 minutes a year.
 
+![](https://github.com/aditya109/journey-aws-cloud-architect/blob/main/09-amazon-s3-introduction/assets/storage-classes.png?raw=true)
+
 ## Quiz
