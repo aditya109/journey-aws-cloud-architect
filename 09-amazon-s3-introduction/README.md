@@ -171,4 +171,91 @@ You can enable Delete Marker while deleting an S3 bucket to restore it later.
 
 ## S3 Storage Classes Overview
 
+- Types of S3 classes:
+
+  - General Purpose
+
+    - ***Amazon S3 Standard - General Purpose***
+
+      - 99.99 % availability
+
+      - used for frequently accessed data
+
+      - low latency and high throughput
+
+      - sustain 2 concurrent facility failures.
+
+        > Use-cases: big-data analytics, mobile & gaming applications, content distribution, etc.
+
+  - Infrequent Access
+
+    - for data that is less frequently accessed, but requires rapid access when needed
+
+    - lower cost than S3 standard.
+
+    - types of IA classes:
+
+      - ***Amazon S3 Standard - Infrequent Access (IA)***
+
+      - 99.9 % availability
+
+        > Use-cases: disaster recovery, backups, etc.
+
+      - ***Amazon S3 One Zone - Infrequent Access (IA)*** 
+
+        - High durability 99.999999999 % in a single AZ; data lost when AZ is destroyed.
+
+        - 99.5% availability
+
+          > Use-cases: storing secondary backup copies of on-premises data, or data you can recreate etc.
+
+    - Glacier
+
+      - low-cost object storage meant for archiving/backup
+
+      - pricing: price for storage + object retrieval cost.
+
+      - types:
+
+        - ***Amazon S3 Glacier - Instant Retrieval*** 
+          - retrieval in ms, great for data accessed once a quarter
+          - minimum storage duration of 90 days.
+
+        - ***Amazon S3 Glacier - Flexible Retrieval***
+          - expedited (1 to 5 mins), standard (3-5 hours), bulk (5-12 hours) - free
+          - minimum storage duration of 90 days
+
+        - ***Amazon S3 Glacier - Deep Archive***
+          - standard (12 hours), bulk (48 hours)
+          - minimum storage duration of 180 days
+
+  - ***Amazon S3 Intelligent Tiering***
+
+    - Small monthly monitoring and auto-tiering fee.
+    - Movies objects automatically between access tiers based on usage.
+    - There are no retrieval charges in S3 intelligent tiering.
+      - *Frequent access tier (automatic)*: default tier
+      - *Infrequent access tier (automatic)*: objects not accessed for 30 days
+      - *Archive instant access tier (automatic)*: objects not accessed for 90 days
+      - *Archive access tier (optional)*: configurable from 90 days to 700+ days
+      - *Deep archive access tier (optional)*: configurable from 180 days to 700+ daysS
+
+  - They can move between classes manually or using S3 lifecycle configurations.
+
+### S3 Durability and Availability
+
+- Durability:
+
+  - High (11 9's or 99.999999999 %) of objects across multiple AZ.
+
+    > If you store 10,000,000 objects with Amazon S3, you can on average expect to incur a loss of a single object once every 10000 years.
+
+  - Same for all storage classes.
+
+- Availability:
+
+  - Measures how readily available a service is.
+  - Varies depending on storage class.
+  - Example: S3 standard has 99.99 % availability = not available 53 minutes a year.
+
 ## Quiz
