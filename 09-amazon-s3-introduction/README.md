@@ -2,7 +2,22 @@
 
 Table of Contents
 
+- [S3 Overview](#s3-overview)
+  * [S3 Buckets](#s3-buckets)
+  * [S3 Objects](#s3-objects)
+- [S3 Security: Bucket Policy](#s3-security--bucket-policy)
+  * [S3 Bucket Policies](#s3-bucket-policies)
+  * [Which policy to use when ?](#which-policy-to-use-when--)
+  * [Other settings](#other-settings)
+- [S3 Website Overview](#s3-website-overview)
+- [S3 Versioning](#s3-versioning)
+- [S3 Replication](#s3-replication)
+  * [Additional Replication options](#additional-replication-options)
+- [S3 Storage Classes Overview](#s3-storage-classes-overview)
+  * [S3 Durability and Availability](#s3-durability-and-availability)
+- [Quiz](#quiz)
 
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ## S3 Overview
 
