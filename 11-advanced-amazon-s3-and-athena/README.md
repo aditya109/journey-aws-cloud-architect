@@ -1,4 +1,4 @@
-# Advanced S3 
+# Advanced S3
 
 Table of Contents
 
@@ -14,21 +14,33 @@ Amazon S3 - Moving between Storage classes
   - Access log files can be set to delete after a 365 days.
   - Can be used to delete old versions of file (if versioning is enabled)
   - Can be used to delete incomplete multi-part uploads.
-- Rules can be created for a certain prefix (example: [s3://mybucket/mp3/*]()) 
+- Rules can be created for a certain prefix (example: [s3://mybucket/mp3/*]())
 - Rules can be created for a certain objects tags (example: Department: Finance)****
 
 ### Examples
 
-| 1.     | Your application on EC2 cerates images thumbnails after profile phots are uploaded to Amazon S3. These thumbnails can be easily recreated, and only need to be kept for 60 days. The source images should be able to be immediately retrieved for these 60 days, and afterwards, the user can wait up to 60 days. How would you design this ? |
+| 1.     | Your application on EC2 creates images thumbnails after profile phots are uploaded to Amazon S3. These thumbnails can be easily recreated, and only need to be kept for 60 days. The source images should be able to be immediately retrieved for these 60 days, and afterwards, the user can wait up to 60 days. How would you design this ? |
 | ------ | ------------------------------------------------------------ |
 | Ans.   | S3 source images be on **Standard**, with a lifecycle configuration to transition them to **Glacier** after 60 days.<br />S3 thumbnails can be on **One-Zone IA**, with a lifecycle configuration to expire them (delete them) after 60 days. |
-| **2.** | A rule in your company state                                 |
-|        |                                                              |
+| **2.** | A rule in your company state that you should be able to recover your deleted S3 objects immediately for 30 days, although this may happen rarely. After this time, and for up to 365 days, deleted objects should be recoverable within 48 days. |
+| Ans.   | Enable S3 Versioning in order to have object versions, so that *delted objects* are in fact hidden by a *delete marker* and can be recovered.<br />Transition the *nonconcurrent versions* of the object to **Standard IA**.<br />Transition  afterwards the *nonconcurrent versions* to **Glacier Deep Archive**. |
 |        |                                                              |
 
+### S3 Analytics
 
+This helps us decide when to transition objects to the right storage class.
+
+- Recommendations for **Standard** and **Standard IA**.
+  - Does not work for One-zone IA or Glacier
+
+- Report is updated daily.
+- 24 to 48 hours to start seeing data analysis.
 
 ## S3 Requester Pays
+
+- In general, bucket owner pay for all Amazon S3 storage and data transfer costs associated with their bucket.
+- **With Requester Pays buckets,** the requester instead of the bucket owner pays the cost of the request and data download from the bucket.
+- Helpful when you want to share large datasets with out
 
 ## S3 Event Notification
 
