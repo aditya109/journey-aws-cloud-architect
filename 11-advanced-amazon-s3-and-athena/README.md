@@ -56,17 +56,81 @@ This helps us decide when to transition objects to the right storage class.
 
 - In general, bucket owners pay for all Amazon S3 storage and data transfer costs associated with their bucket.
 - **With Requester Pays buckets**, the requester instead of the bucket owner pays the cost of the request and the data download from the bucket.
-- Helpful when you want to share large datasets with other accounts.
+- Helpful when you want to share large data-sets with other accounts.
 - The requester must be authenticated in AWS (cannot be anonymous).
--  
 
 ## S3 Event Notification
 
+- The events like `S3:ObjectCreated`, `S3:ObjectRemoved`, `S3:ObjectRestore`, `S3:Replication`, ... can be filtered based on object name.
+
+  > *Use-case*: generate thumbnails of images uploaded to S3.
+
+- **Can create as many *S3 events* as desired**.
+
+- S3 event notifications typically deliver events in seconds but can sometimes take a minute or longer.
+
+### Event notifications with Amazon EventBridge
+
+- Advanced filtering options with JSON rules (metadata, object size, name, ....)
+- Multiple destinations - ex-step functions, Kinesis Streams/Firehose,...etc
+- EventBridge Capabilities - archive, replay events, reliable delivery
+
 ## S3 Performance
+
+### Baseline Performance
+
+Amazon S3 automatically scales to high request rates, latency 100-200 ms.
+
+> Any application can achieve at least 3.5k PUT/COPY/POST/DELETE and 5.5k GET/HEAD requests per second per prefix in a bucket.
+
+There are no limits to the number of prefixes in a bucket.
+Example (object path => prefix):
+
+- `bucket/folder1/sub1/file` => `/folder1/sub1`
+- `bucket/folder1/sub2/file` => `/folder1/sub2`
+- `bucket/1/file` => `/1/`
+- `bucket/2/file` => `/2/`
+
+If you spread reads across all four prefixes evenly, you can achieve 22k requests per second for GET and HEAD.
+
+#### Upload types
+
+##### Multi-part upload
+
+- Recommended for files > 100 MB
+- Can help parallelize uploads (speeds up transfers)
+
+##### S3 Transfer Acceleration
+
+- Increase transfer speed by transferring file to an AWS edge location which will forward the data to the S3 bucket in the target region.
+- Compatible with multi-part upload.
+
+### S3 Byte-Range Fetches
+
+- Parallelize GETs by requesting specific byte ranges.
+- Better resilience in case of failures.
+- Can be used:
+  - To speed up downloads.
+  - To retrieve only partial data.
 
 ## S3 Select & Glacier Select
 
+- Retrieve less data using SQL by performing **server-side filtering**.
+- Can filter by rows and columns (simple SQL statements).
+- Less network transfer, less CPU cost client-side.
+
 ## S3 Batch Operations
+
+- Perform bulk operations on existing S3 objects with a single request, example:
+  - modify object metadata & properties
+  - copy objects between S3 buckets
+  - encrypt unencrypted objects
+  - modify ACLs, tags
+  - restore objects from S3 Glacier
+  - invoke Lambda function to perform custom action on each object
+- A job consists of a list of objects, the action to perform and optional parameters
+- S3 Batch Operations manages retries, tracks progress, sends completion notifications, generate reports, etc.
+- **You can use S3 Inventory to get object list and use S3 Select to filter your objects.**
 
 ## Quiz
 
