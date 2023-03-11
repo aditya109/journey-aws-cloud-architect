@@ -134,3 +134,63 @@ If you spread reads across all four prefixes evenly, you can achieve 22k request
 
 ## Quiz
 
+## S3 Encryption
+
+- You can encrypt objects in S3 buckets using one of 4 methods.
+
+  - Server-side encryption (SSE)
+
+    - SSE with Amazon S3-Managed Keys (SSE-S3) 
+
+      - Encrypts S3 objects using keys handled, managed and owned by AWS
+      - Encryption type is AES-256
+      - Must set header `"x-amz-server-side-encryption":"AES256"`.
+      - **Enabled by default for new buckets & new objects.**
+
+    - SSE with KMS keys stored in AWS KMS (SSE-KMS) 
+
+      - Encryption using keys handled and managed by AWS KMS (Key Management Service)
+      - KMS advantages: user control + audit key usage using Cloud Trail.
+      - Must set header `"x-amz-server-side-encryption":"aws:kms"`.
+
+      Limitation:
+
+      - If you use SSE-KMS, you may be impacted by KMS limits.
+      - When you upload, it calls the **GenerateDataKey** KMS API.
+      - When you download, it calls the **Decrypt** KMS API.
+      - Count toward the KMS quota per second (5.5k/10k/30k req/s based on region).
+      - You may request a quota increase using the Service Quota Console.
+
+    - SSE with Customer-Provided Keys (SSE-C) (
+
+      - SSE using keys fully managed by the customer outside of AWS.
+      - AWS S3 does **NOT** store the encryption key you provide.
+      - **HTTPS must be used.**
+      - Encryption key must provided in HTTP headers, for every HTTP request made.
+
+  - Client-side encryption
+
+    - Use client libraries such as **Amazon S3 Client-side Encryption Library**
+    - Clients must encrypt data themselves before sending to Amazon S3.
+    - Clients must decrypt data themselves when retrieving from Amazon S3.
+    - Customer fully manages the keys and encryption cycle.
+
+- Encryption in-flight/ in-transit (SSL/TLS)
+
+  - Amazon S3 exposes two endpoints:
+    - **HTTP Endpoint** - non-encrypted
+    - **HTTPS Endpoint** - in-flight encryption (recommended, required for SSE-C, default for most clients)
+
+## S3 Default Encryption
+
+## S3 CORS
+
+## S3 MFA Delete
+
+## S3 MFA Delete
+
+## S3 Access Logs
+
+## S3 Pre-signed URLs
+
+## Glacier Vault Lock & S3 Object Lock
