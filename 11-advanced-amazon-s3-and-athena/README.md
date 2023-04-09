@@ -139,11 +139,7 @@ If you spread reads across all four prefixes evenly, you can achieve 22k request
 | Ans.   | Use an S3 Lifecycle Policy to automate old/unfinished parts deletion. |
 | **Q.** | **You are looking to build an index of your files in S3, using Amazon RDS PostgreSQL. To build this index, it is necessary to read the first 250 bytes of each object in S3, which contains some metadata about the content of the file itself. There are over 100,000 files in your S3 bucket, amounting to 50 TB of data. How can you build this index efficiently?** |
 | Ans.   | Create an application that will traverse the S3 buckets, issue a Byte Range Fetch for the first 250 bytes, and store that information in RDS. |
-|        |                                                              |
-|        |                                                              |
-
-| Q.     | While you're uploading large files to an S3 bucket using Multi-part Upload, there are a lot of unfinished parts stored in the S3 bucket due to network issues. You are not using these unfinished parts and they cost you money. What is the best approach to remove these unfinished parts? |
-| ------ | ------------------------------------------------------------ |
+| **Q.** | **While you're uploading large files to an S3 bucket using Multi-part Upload, there are a lot of unfinished parts stored in the S3 bucket due to network issues. You are not using these unfinished parts and they cost you money. What is the best approach to remove these unfinished parts?** |
 | Ans.   | Use an S3 Lifecycle Policy to automate old/unfinished parts deletion. |
 | **Q.** | **You are looking to build an index of your files in S3, using Amazon RDS PostgreSQL. To build this index, it is necessary to read the first 250 bytes of each object in S3, which contains some metadata about the content of the file itself. There are over 100,000 files in your S3 bucket, amounting to 50 TB of data. How can you build this index efficiently?** |
 | Ans.   | Create an application that will traverse the S3 buckets, issue a Byte Range Fetch for the first 250 bytes, and store that information in RDS. |
@@ -199,7 +195,25 @@ If you spread reads across all four prefixes evenly, you can achieve 22k request
 
 ## S3 Default Encryption
 
+Default Encryption vs Bucket Policies
+
+- SSE-S3 encryption is automatically applied to new objects stored in S3 bucket.
+- Optionally, you can *force encryption* using a bucket policy and refuse any API call to PUT an S3 object without encryption headers (SSE-KMS or SSE-C)
+
+**NOTE:** Bucket Policies are evaluated before Default Encryption.
+
 ## S3 CORS
+
+### What is CORS ?
+
+It is Cross-Origin Resource Sharing (CORS), where Origin = scheme (protocol) + host (domain) + port. 
+For example, https://www.example.com (implied port is 443 for HTTPS, 80 for HTTP)
+
+It is a web-browser based mechanism to allow requests to other requests while visiting the main origin.
+For example,  https://www.example.com/app1 and https://www.example.com/app2 are of same origin, whereas 
+https://www.example.com and https://other.example.com are from different origins. The request won't be fulfilled unless the other origin allows for the requests, using CORS Headers (example: **Access-Control-Allow-Origin**), which is known during pre-flight reque
+
+
 
 ## S3 MFA Delete
 
