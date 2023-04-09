@@ -134,6 +134,22 @@ If you spread reads across all four prefixes evenly, you can achieve 22k request
 
 ## Quiz
 
+| Q.     | While you're uploading large files to an S3 bucket using Multi-part Upload, there are a lot of unfinished parts stored in the S3 bucket due to network issues. You are not using these unfinished parts and they cost you money. What is the best approach to remove these unfinished parts? |
+| ------ | ------------------------------------------------------------ |
+| Ans.   | Use an S3 Lifecycle Policy to automate old/unfinished parts deletion. |
+| **Q.** | **You are looking to build an index of your files in S3, using Amazon RDS PostgreSQL. To build this index, it is necessary to read the first 250 bytes of each object in S3, which contains some metadata about the content of the file itself. There are over 100,000 files in your S3 bucket, amounting to 50 TB of data. How can you build this index efficiently?** |
+| Ans.   | Create an application that will traverse the S3 buckets, issue a Byte Range Fetch for the first 250 bytes, and store that information in RDS. |
+|        |                                                              |
+|        |                                                              |
+
+| Q.     | While you're uploading large files to an S3 bucket using Multi-part Upload, there are a lot of unfinished parts stored in the S3 bucket due to network issues. You are not using these unfinished parts and they cost you money. What is the best approach to remove these unfinished parts? |
+| ------ | ------------------------------------------------------------ |
+| Ans.   | Use an S3 Lifecycle Policy to automate old/unfinished parts deletion. |
+| **Q.** | **You are looking to build an index of your files in S3, using Amazon RDS PostgreSQL. To build this index, it is necessary to read the first 250 bytes of each object in S3, which contains some metadata about the content of the file itself. There are over 100,000 files in your S3 bucket, amounting to 50 TB of data. How can you build this index efficiently?** |
+| Ans.   | Create an application that will traverse the S3 buckets, issue a Byte Range Fetch for the first 250 bytes, and store that information in RDS. |
+|        |                                                              |
+|        |                                                              |
+
 ## S3 Encryption
 
 - You can encrypt objects in S3 buckets using one of 4 methods.
